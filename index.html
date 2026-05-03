@@ -118,6 +118,52 @@ function getTicks(min, max, count = 5) {
   // Generate array of values...
 }
                 </code></pre>
+            <section>
+                <h3>Performance: LTTB Sampling</h3>
+                <p style="font-size: 0.8em;">Handling 10k+ points without UI lag.</p>
+                <pre><code class="javascript" data-trim>
+series: [{
+  type: 'line',
+  sampling: 'lttb', // Largest-Triangle-Three-Buckets
+  data: heavyData
+}]
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>UI/UX: VisualMap & MarkLine</h3>
+                <div class="slide-grid">
+                    <pre><code class="javascript" data-trim>
+visualMap: {
+  pieces: [
+    { gt: 0, color: '#00ff00' },
+    { lte: 0, color: '#ff0000' }
+  ]
+}
+                    </code></pre>
+                    <pre><code class="javascript" data-trim>
+markLine: {
+  data: [{ type: 'average' }],
+  lineStyle: { color: '#888' }
+}
+                    </code></pre>
+                </div>
+                <div class="chart-placeholder">[DEMO: VISUAL ENHANCEMENTS]</div>
+            </section>
+
+            <section>
+                <h2>Implementation Checklist</h2>
+                <ul style="font-size: 0.8em;">
+                    <li>Use <code>type: 'value'</code> for X-axis.</li>
+                    <li>Implement LTTB sampling for large datasets.</li>
+                    <li>Calculate ticks manually for clean timestamps.</li>
+                    <li>Leverage <code>visualMap</code> for performance indicators.</li>
+                </ul>
+            </section>
+
+            <section data-background-color="#64ffda">
+                <h1 style="color: #0a192f;">Q & A</h1>
+                <p style="color: #0a192f;">Thank you!</p>
             </section>
         </div>
     </div>
