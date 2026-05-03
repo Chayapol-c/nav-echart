@@ -15,7 +15,28 @@
 <body>
     <div class="reveal">
         <div class="slides">
-            <!-- Slides will be added here -->
+            <section data-background-color="#0a192f">
+                <h1 style="font-size: 2.5em;">Mastering NAV Charts</h1>
+                <h3 style="color: #8892b0;">with Apache ECharts</h3>
+                <p style="margin-top: 50px; font-size: 0.8em; color: #64ffda;">Frontend Team Presentation | May 2026</p>
+            </section>
+
+            <section>
+                <h2>The Challenge: NAV Data</h2>
+                <div class="slide-grid">
+                    <div>
+                        <ul>
+                            <li class="fragment">Discontinuity (Weekends/Holidays)</li>
+                            <li class="fragment">Fund Pricing Gaps</li>
+                            <li class="fragment">Irregular Sampling intervals</li>
+                            <li class="fragment">Precision requirements (0.0001)</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <p style="color: #8892b0; font-style: italic;">"Standard 'time' axes often create misleading visual gaps or handle missing data points poorly in financial contexts."</p>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
