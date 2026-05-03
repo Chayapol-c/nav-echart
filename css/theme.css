@@ -13,6 +13,10 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+.reveal-viewport {
+    background: var(--bg-color) !important;
+}
+
 .reveal h1, .reveal h2, .reveal h3 {
     color: var(--heading-color);
     text-transform: none;
