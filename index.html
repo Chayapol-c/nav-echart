@@ -75,6 +75,49 @@ xAxis: {
                     </div>
                 </div>
                 <div class="chart-placeholder">[DEMO: CATEGORY AXES DISTORTION]</div>
+            <section>
+                <h3>Evolution 3: <code>type: 'value'</code></h3>
+                <p>The Ultimate Solution for Fund Charts</p>
+                <div class="slide-grid">
+                    <pre><code class="javascript" data-trim>
+xAxis: {
+  type: 'value',
+  min: startTime,
+  max: endTime,
+  interval: manualInterval
+}
+                    </code></pre>
+                    <div style="font-size: 0.7em;">
+                        <ul>
+                            <li>Precise spatial representation.</li>
+                            <li>Handles gaps without visual distortion.</li>
+                            <li>Requires <strong>Manual Tick Calculation</strong> for readability.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart-placeholder">[DEMO: THE PERFECT NAV CHART]</div>
+            </section>
+
+            <section>
+                <h3>Deep Dive: Manual Ticks</h3>
+                <pre><code class="javascript" data-trim data-line-numbers="2-10|12-18">
+// Logic for Calculating Readability
+function getTicks(min, max, count = 5) {
+  const range = max - min;
+  const rawStep = range / (count - 1);
+  const mag = Math.pow(10, Math.floor(Math.log10(rawStep)));
+  const res = rawStep / mag;
+  
+  let step;
+  if (res < 1.5) step = 1;
+  else if (res < 3) step = 2;
+  else if (res < 7) step = 5;
+  else step = 10;
+  
+  step *= mag;
+  // Generate array of values...
+}
+                </code></pre>
             </section>
         </div>
     </div>
