@@ -1,1 +1,60 @@
-/* Custom styles for the Reveal.js presentation */
+:root {
+    --bg-color: #0a192f;
+    --text-color: #e6f1ff;
+    --accent-color: #64ffda;
+    --secondary-bg: #112240;
+    --code-bg: #172a45;
+    --heading-color: #ccd6f6;
+}
+
+.reveal {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+    color: var(--heading-color);
+    text-transform: none;
+    font-weight: 700;
+}
+
+.reveal h1 { color: var(--accent-color); }
+
+.reveal .slides section {
+    text-align: left;
+    padding: 40px;
+}
+
+.reveal pre {
+    background: var(--code-bg);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    width: 100%;
+}
+
+.reveal code {
+    font-family: 'Fira Code', 'Source Code Pro', monospace;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.slide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.chart-placeholder {
+    background: var(--secondary-bg);
+    border: 2px dashed var(--accent-color);
+    border-radius: 12px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-top: 20px;
+}
