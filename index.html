@@ -36,6 +36,45 @@
                         <p style="color: #8892b0; font-style: italic;">"Standard 'time' axes often create misleading visual gaps or handle missing data points poorly in financial contexts."</p>
                     </div>
                 </div>
+            <section>
+                <h3>Evolution 1: <code>type: 'time'</code></h3>
+                <div class="slide-grid">
+                    <pre><code class="javascript" data-trim>
+xAxis: {
+  type: 'time',
+  splitLine: { show: false }
+}
+                    </code></pre>
+                    <div style="font-size: 0.7em;">
+                        <p><strong style="color: #ff4d4d;">The Issue:</strong></p>
+                        <ul>
+                            <li>Visual gaps on non-trading days.</li>
+                            <li>Inconsistent density.</li>
+                            <li>Axis labels can be unpredictable.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart-placeholder">[DEMO: TIME AXES ISSUES]</div>
+            </section>
+
+            <section>
+                <h3>Evolution 2: <code>type: 'category'</code></h3>
+                <div class="slide-grid">
+                    <pre><code class="javascript" data-trim>
+xAxis: {
+  type: 'category',
+  data: dates // ['2024-01-01', ...]
+}
+                    </code></pre>
+                    <div style="font-size: 0.7em;">
+                        <p><strong style="color: #ffaa00;">The Trade-off:</strong></p>
+                        <ul>
+                            <li>Eliminates visual gaps (continuous line).</li>
+                            <li><strong style="color: #ff4d4d;">Critical Fail:</strong> Distorts time scale (Jan 1st and Jan 2nd have same distance as Dec 20th and Jan 2nd).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chart-placeholder">[DEMO: CATEGORY AXES DISTORTION]</div>
             </section>
         </div>
     </div>
