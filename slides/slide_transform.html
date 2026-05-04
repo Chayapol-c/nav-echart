@@ -1,7 +1,5 @@
 <section>
-  <h3 class="text-teal-400 mb-8 font-bold text-4xl">
-    Transform function
-  </h3>
+  <h3 class="text-teal-400 mb-8 font-bold text-4xl">ฟังก์ชันการแปลงข้อมูล (Transform function)</h3>
   <div class="grid grid-cols-12 gap-8 text-left">
     <!-- Explanation -->
     <div class="col-span-5 space-y-6">
@@ -9,30 +7,27 @@
         <h4
           class="font-bold text-teal-400 mb-2 uppercase text-xs tracking-widest"
         >
-          1. Strategy Selection
+          1. การเลือกกลยุทธ์ (Strategy Selection)
         </h4>
         <p class="text-lg text-slate-300 italic">
-          Determines if we need high-precision <code>value</code> mapping based
-          on fund history duration.
+          ตัดสินใจว่าจำเป็นต้องใช้การแมปแบบ <code>value</code> ที่มีความแม่นยำสูงหรือไม่ โดยอิงจากระยะเวลาประวัติของกองทุน
         </p>
       </div>
       <div class="fragment space-y-4" data-fragment-index="1">
         <h4 class="text-amber-400 font-bold uppercase text-xs tracking-widest">
-          2. Physical Anchors
+          2. จุดยึดทางกายภาพ (Physical Anchors)
         </h4>
         <p class="text-lg text-slate-400">
-          Calculates exact pixel positions for labels to bypass ECharts' default
-          "Nice Ticks" spacing logic.
+          คำนวณตำแหน่งพิกเซลที่แน่นอนสำหรับป้ายชื่อ เพื่อข้ามตรรกะการเว้นระยะแบบ "Nice Ticks" มาตรฐานของ ECharts
         </p>
       </div>
 
       <div class="fragment space-y-4" data-fragment-index="2">
         <h4 class="text-blue-400 font-bold uppercase text-xs tracking-widest">
-          3. Data Interpolation
+          3. การประมาณค่าในช่วงข้อมูล (Data Interpolation)
         </h4>
         <p class="text-lg text-slate-400">
-          Maps each data point to a mathematical <code>xValue</code>, ensuring
-          smooth curves even across weekend gaps.
+          แมปจุดข้อมูลแต่ละจุดไปยัง <code>xValue</code> ทางคณิตศาสตร์ เพื่อให้แน่ใจว่าเส้นกราฟจะมีความสมูทแม้จะมีช่องว่างในวันหยุด
         </p>
       </div>
     </div>
@@ -46,20 +41,20 @@
           class="m-0"
         ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers>
 export const transformChartData = (navHistory, timeFrame) => {
-  // Step 1: Detect history context & select labels
+  // ขั้นตอนที่ 1: ตรวจสอบบริบทประวัติและเลือกป้ายชื่อ
   const { isMoreThanOneYear } = checkHistory(navHistory);
   const labels = getStrategyLabels(navHistory, timeFrame);
 
-  // Step 2: Calculate Value Anchors (if needed)
+  // ขั้นตอนที่ 2: คำนวณจุดยึดค่า (Value Anchors) หากจำเป็น
   const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
 
   const xAxis = {
-    // The "Magic" Switch: Force value axis for precision
+    // สวิตช์ "เวทมนตร์": บังคับใช้แกนแบบ value เพื่อความแม่นยำ
     type: anchors.length > 0 ? 'value' : 'category',
     axisLabel: { formatter: formatLabel }
   };
 
-  // Step 3: Interpolate Points
+  // ขั้นตอนที่ 3: ประมาณค่าในช่วงของจุดข้อมูล
   const data = navHistory.map((item, index) => ({
     ...item,
     ...(anchors.length > 0 && {
@@ -76,20 +71,20 @@ export const transformChartData = (navHistory, timeFrame) => {
           data-fragment-index="0"
         ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="2-4">
 export const transformChartData = (navHistory, timeFrame) => {
-  // Step 1: Detect history context & select labels
+  // ขั้นตอนที่ 1: ตรวจสอบบริบทประวัติและเลือกป้ายชื่อ
   const { isMoreThanOneYear } = checkHistory(navHistory);
   const labels = getStrategyLabels(navHistory, timeFrame);
 
-  // Step 2: Calculate Value Anchors (if needed)
+  // ขั้นตอนที่ 2: คำนวณจุดยึดค่า (Value Anchors) หากจำเป็น
   const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
 
   const xAxis = {
-    // The "Magic" Switch: Force value axis for precision
+    // สวิตช์ "เวทมนตร์": บังคับใช้แกนแบบ value เพื่อความแม่นยำ
     type: anchors.length > 0 ? 'value' : 'category',
     axisLabel: { formatter: formatLabel }
   };
 
-  // Step 3: Interpolate Points
+  // ขั้นตอนที่ 3: ประมาณค่าในช่วงของจุดข้อมูล
   const data = navHistory.map((item, index) => ({
     ...item,
     ...(anchors.length > 0 && {
@@ -107,20 +102,20 @@ export const transformChartData = (navHistory, timeFrame) => {
           data-fragment-index="1"
         ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="7,10-11">
 export const transformChartData = (navHistory, timeFrame) => {
-  // Step 1: Detect history context & select labels
+  // ขั้นตอนที่ 1: ตรวจสอบบริบทประวัติและเลือกป้ายชื่อ
   const { isMoreThanOneYear } = checkHistory(navHistory);
   const labels = getStrategyLabels(navHistory, timeFrame);
 
-  // Step 2: Calculate Value Anchors (if needed)
+  // ขั้นตอนที่ 2: คำนวณจุดยึดค่า (Value Anchors) หากจำเป็น
   const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
 
   const xAxis = {
-    // The "Magic" Switch: Force value axis for precision
+    // สวิตช์ "เวทมนตร์": บังคับใช้แกนแบบ value เพื่อความแม่นยำ
     type: anchors.length > 0 ? 'value' : 'category',
     axisLabel: { formatter: formatLabel }
   };
 
-  // Step 3: Interpolate Points
+  // ขั้นตอนที่ 3: ประมาณค่าในช่วงของจุดข้อมูล
   const data = navHistory.map((item, index) => ({
     ...item,
     ...(anchors.length > 0 && {
@@ -138,20 +133,20 @@ export const transformChartData = (navHistory, timeFrame) => {
           data-fragment-index="2"
         ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="18-20">
 export const transformChartData = (navHistory, timeFrame) => {
-  // Step 1: Detect history context & select labels
+  // ขั้นตอนที่ 1: ตรวจสอบบริบทประวัติและเลือกป้ายชื่อ
   const { isMoreThanOneYear } = checkHistory(navHistory);
   const labels = getStrategyLabels(navHistory, timeFrame);
 
-  // Step 2: Calculate Value Anchors (if needed)
+  // ขั้นตอนที่ 2: คำนวณจุดยึดค่า (Value Anchors) หากจำเป็น
   const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
 
   const xAxis = {
-    // The "Magic" Switch: Force value axis for precision
+    // สวิตช์ "เวทมนตร์": บังคับใช้แกนแบบ value เพื่อความแม่นยำ
     type: anchors.length > 0 ? 'value' : 'category',
     axisLabel: { formatter: formatLabel }
   };
 
-  // Step 3: Interpolate Points
+  // ขั้นตอนที่ 3: ประมาณค่าในช่วงของจุดข้อมูล
   const data = navHistory.map((item, index) => ({
     ...item,
     ...(anchors.length > 0 && {
@@ -164,7 +159,7 @@ export const transformChartData = (navHistory, timeFrame) => {
         </code></pre>
       </div>
       <p class="text-xs text-slate-500 mt-4 italic text-right font-mono">
-        Simplified for clarity. Full logic in inquiryGraphFundDetail.ts
+        ลดทอนเพื่อความชัดเจน ตรรกะฉบับเต็มอยู่ใน inquiryGraphFundDetail.ts
       </p>
     </div>
   </div>
