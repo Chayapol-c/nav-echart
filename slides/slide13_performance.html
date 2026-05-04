@@ -1,0 +1,14 @@
+<section>
+  <h3 class="text-teal-300 text-3xl mb-8">Performance: LTTB Sampling</h3>
+  <p class="text-4xl mb-8">Handling 10k+ points without UI lag.</p>
+  <div class="bg-slate-800 p-8 rounded-lg border border-slate-700 text-left">
+    <pre><code class="typescript" data-trim>
+series: [{
+  type: 'line',
+  sampling: 'lttb', // Largest-Triangle-Three-Buckets
+  data: heavyData
+}]
+    </code></pre>
+    <p class="mt-4 text-slate-400 text-xl italic">LTTB preserves visual fidelity while reducing DOM pressure.</p>
+  </div>
+</section>

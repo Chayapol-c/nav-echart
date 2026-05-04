@@ -1,0 +1,28 @@
+<section>
+  <h3 class="text-blue-400 mb-8 font-bold text-shadow">Step 3: The Fallback</h3>
+  <div class="grid grid-cols-12 gap-8 text-left">
+    <div class="col-span-4 space-y-6">
+      <div class="p-6 bg-blue-900/20 border-l-4 border-blue-500 shadow-xl">
+        <h4 class="text-blue-400 font-bold mb-2 uppercase tracking-widest text-sm">Distribution</h4>
+        <p class="text-xl text-slate-300">Mathematically distribute labels across available buckets.</p>
+      </div>
+      <p class="text-lg text-slate-400 italic">This ensures consistent UI coverage even with irregular datasets.</p>
+    </div>
+    <div class="col-span-8 overflow-x-auto">
+      <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="11">
+const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
+  const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
+  const monthBucketIndexes = getMonthBucketLastIndexes(data);
+  const expectedCount = Math.min(DEFAULT_COUNT, monthBucketIndexes.length);
+
+  if (monthGapIndexes.length >= expectedCount) {
+    return monthGapIndexes;
+  }
+  
+  // Fallback Logic: Even distribution
+  return getEvenlySpacedIndexes(monthBucketIndexes);
+};
+      </code></pre>
+    </div>
+  </div>
+</section>

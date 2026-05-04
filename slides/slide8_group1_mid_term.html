@@ -1,0 +1,29 @@
+<section>
+  <h3 class="text-teal-400 mb-8">Group 1: 1Y, 6M, 3M (Mid-Term)</h3>
+  <div class="grid grid-cols-12 gap-8 text-left">
+    <div class="col-span-5 space-y-4">
+      <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-teal-500">
+        <h4 class="font-bold text-teal-400 mb-2">Strategy: Month Gaps</h4>
+        <p class="text-lg text-slate-300 italic">"Prioritize calendar alignment for standard financial reporting."</p>
+      </div>
+      <ul class="text-2xl space-y-4 text-slate-300 mt-6">
+        <li><span class="text-teal-400 font-mono">1Y:</span> 4-Month Gaps</li>
+        <li><span class="text-teal-400 font-mono">6M:</span> 2-Month Gaps</li>
+        <li><span class="text-teal-400 font-mono">3M:</span> 1-Month Gaps</li>
+      </ul>
+    </div>
+    <div class="col-span-7">
+      <pre><code class="typescript text-sm" data-trim data-noescape>
+// Logic shared across standard periods
+export const shouldShowXAxisLabel1Y = (index, data) => {
+  const indexes = getMonthGapIndexesWithFallback(
+    data, 
+    4 // 4-Month interval
+  );
+  return isTargetIndex(indexes, index);
+};
+      </code></pre>
+      <p class="mt-4 text-slate-400 text-lg">Ensures "Dec 2023", "Apr 2024", "Aug 2024" type spacing.</p>
+    </div>
+  </div>
+</section>

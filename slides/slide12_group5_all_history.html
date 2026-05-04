@@ -1,0 +1,116 @@
+<section>
+  <h3 class="text-pink-400 mb-8">Group 5: All</h3>
+  <div class="flex gap-8 text-left w-full items-start">
+    <!-- Sidebar: Locked at 40% width -->
+    <div class="w-[40%] flex-shrink-0 space-y-4">
+      <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-pink-500">
+        <h4 class="font-bold text-pink-400 mb-2">Strategy: Smart Detection</h4>
+        <p class="text-lg text-slate-300 italic">
+          "Dynamically adjust logic based on the fund's age."
+        </p>
+      </div>
+      <p class="text-xl text-slate-400">
+        The system detects the history length and selects the best algorithm.
+      </p>
+      <ul class="text-lg space-y-2 text-slate-300 mt-4">
+        <li>
+          🕰️ <span class="text-pink-400 font-bold">> 1 Year:</span> Use Year
+          Buckets.
+        </li>
+        <li>
+          📅 <span class="text-pink-400 font-bold">> 1 Month:</span> Use Month
+          Gaps.
+        </li>
+        <li>
+          ⚡ <span class="text-pink-400 font-bold">< 1 Month:</span> Use Math
+          Spacing.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Code: Locked at 60% width -->
+    <div class="w-[60%] flex-shrink-0">
+      <div class="overflow-hidden w-full bg-slate-900/50 rounded-lg h-[450px] flex items-start r-stack">
+        <!-- Step 1: Initialization (Visible at start, fades out on first click) -->
+        <pre class="w-full m-0 fragment fade-out" data-fragment-index="0"><code class="typescript text-xs" data-trim data-noescape data-line-numbers="2">
+export const shouldShowXAxisLabelAll = (data, index) => {
+  const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
+
+  if (isMoreThanOneYear) {
+    // Legacy funds: Year intervals
+    return shouldShowXAxisLabel5Y(index, data);
+  }
+
+  if (isMoreThanMonth) {
+    // Established funds: Month gaps
+    return shouldShowXAxisLabel1Y(index, data);
+  }
+
+  // New funds: Even math spacing
+  return shouldShowXAxisLabel1M(data, index);
+};
+        </code></pre>
+
+        <!-- Step 2: Year Check (Shows on first click) -->
+        <pre class="w-full m-0 fragment fade-in-then-out" data-fragment-index="0"><code class="typescript text-xs" data-trim data-noescape data-line-numbers="4-7">
+export const shouldShowXAxisLabelAll = (data, index) => {
+  const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
+
+  if (isMoreThanOneYear) {
+    // Legacy funds: Year intervals
+    return shouldShowXAxisLabel5Y(index, data);
+  }
+
+  if (isMoreThanMonth) {
+    // Established funds: Month gaps
+    return shouldShowXAxisLabel1Y(index, data);
+  }
+
+  // New funds: Even math spacing
+  return shouldShowXAxisLabel1M(data, index);
+};
+        </code></pre>
+
+        <!-- Step 3: Month Check (Shows on second click) -->
+        <pre class="w-full m-0 fragment fade-in-then-out" data-fragment-index="1"><code class="typescript text-xs" data-trim data-noescape data-line-numbers="9-12">
+export const shouldShowXAxisLabelAll = (data, index) => {
+  const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
+
+  if (isMoreThanOneYear) {
+    // Legacy funds: Year intervals
+    return shouldShowXAxisLabel5Y(index, data);
+  }
+
+  if (isMoreThanMonth) {
+    // Established funds: Month gaps
+    return shouldShowXAxisLabel1Y(index, data);
+  }
+
+  // New funds: Even math spacing
+  return shouldShowXAxisLabel1M(data, index);
+};
+        </code></pre>
+
+        <!-- Step 4: Fallback (Shows on third click) -->
+        <pre class="w-full m-0 fragment fade-in" data-fragment-index="2"><code class="typescript text-xs" data-trim data-noescape data-line-numbers="15">
+export const shouldShowXAxisLabelAll = (data, index) => {
+  const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
+
+  if (isMoreThanOneYear) {
+    // Legacy funds: Year intervals
+    return shouldShowXAxisLabel5Y(index, data);
+  }
+
+  if (isMoreThanMonth) {
+    // Established funds: Month gaps
+    return shouldShowXAxisLabel1Y(index, data);
+  }
+
+  // New funds: Even math spacing
+  return shouldShowXAxisLabel1M(data, index);
+};
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>

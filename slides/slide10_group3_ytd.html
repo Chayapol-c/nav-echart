@@ -1,0 +1,78 @@
+<section>
+  <!-- 10.0: YTD Strategy -->
+  <section>
+    <h3 class="text-amber-400 mb-8">Group 3: YTD (Calendar Anchored)</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-5 space-y-4">
+        <div class="p-6 bg-slate-800 rounded-lg border-l-4 border-amber-500">
+          <h4 class="font-bold text-amber-400 mb-2 uppercase tracking-widest text-sm">Strategy: Key Milestones</h4>
+          <p class="text-lg text-slate-300 italic">"Focus on the Start of Year and the Half-Year mark."</p>
+        </div>
+        <ul class="text-xl space-y-4 text-slate-300 mt-6">
+          <li>📍 <span class="text-amber-400 font-bold">January:</span> The critical start point.</li>
+          <li>📍 <span class="text-amber-400 font-bold">Middle:</span> The median progress point.</li>
+          <li>📍 <span class="text-amber-400 font-bold">Latest:</span> The current status.</li>
+        </ul>
+        <div class="bg-amber-600 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
+          ↓ Press Down for Detail
+        </div>
+      </div>
+      <div class="col-span-7">
+        <pre><code class="typescript text-xs" data-trim data-noescape data-line-numbers="10-14">
+export const shouldShowXAxisLabelYTD = (index, data) => {
+  const latestYear = dayjs(data[data.length - 1].navDate).year();
+
+  // January: The most important anchor for YTD
+  const janIndex = findLastIndexByMonthKey(data, `${latestYear}-01`);
+
+  // Middle: The midpoint of available YTD data
+  const midIndex = findLastIndexByMonthKey(data, middleMonthKey);
+
+  // Current: Always show the latest price
+  const lastIndex = data.length - 1;
+
+  const indexes = [janIndex, midIndex, lastIndex];
+  return isTargetIndex(indexes, index);
+};
+        </code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10.1: Month Key Detail -->
+  <section data-visibility="uncounted">
+    <h3 class="text-amber-300 mb-8 italic">Step 3.1: Month Key Lookup Implementation</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="fragment" data-fragment-index="1">
+          <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Key Generation</span>
+          <p class="text-xl">Target a specific month using the <code>YYYY-MM</code> format.</p>
+        </div>
+        <div class="fragment" data-fragment-index="2">
+          <span class="text-orange-400 font-bold uppercase text-xs tracking-widest">Backward Scan</span>
+          <p class="text-xl text-slate-300">Scan from the latest date backward to find the very last available point in that month.</p>
+        </div>
+        <div class="fragment" data-fragment-index="3">
+          <span class="text-yellow-400 font-bold uppercase text-xs tracking-widest">Efficiency</span>
+          <p class="text-xl text-slate-300">Immediately returns the first match found to ensure we get the "closing" price of that month.</p>
+        </div>
+      </div>
+      <div class="col-span-8 overflow-x-auto">
+        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="4-8">
+const findLastIndexByMonthKey = (data, monthKey) => {
+  // Start from the end of the array
+  for (let index = data.length - 1; index >= 0; index -= 1) {
+    const currentKey = dayjs(data[index].navDate).format('YYYY-MM');
+
+    if (currentKey === monthKey) {
+      return index; // Found the last trading day of the month
+    }
+  }
+
+  return undefined; // Month not found in data
+};
+        </code></pre>
+      </div>
+    </div>
+  </section>
+</section>

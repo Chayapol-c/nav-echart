@@ -1,0 +1,76 @@
+<section>
+  <!-- 6.0: Step 2 Orchestration -->
+  <section>
+    <h3 class="text-amber-400 mb-8">Step 2: The Guard</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="p-6 bg-amber-900/20 border-l-4 border-amber-500">
+          <h4 class="text-amber-400 font-bold mb-2 uppercase tracking-widest text-sm">Integrity Check</h4>
+          <p class="text-xl italic text-slate-300">"Do we have enough labels to satisfy the UI?"</p>
+        </div>
+        <div class="bg-amber-600 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
+          ↓ Press Down for Detail
+        </div>
+      </div>
+      <div class="col-span-8 overflow-x-auto">
+        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="5-8">
+const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
+  const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
+
+  // Guard Logic: Verify sufficiency via month buckets
+  const monthBucketIndexes = getMonthBucketLastIndexes(data);
+  const expectedCount = Math.min(DEFAULT_COUNT, monthBucketIndexes.length);
+
+  if (monthGapIndexes.length >= expectedCount) {
+    return monthGapIndexes;
+  }
+};
+        </code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.1: Bucket Logic Detail -->
+  <section data-visibility="uncounted">
+    <h3 class="text-amber-300 mb-8 italic">Step 2.1: Date Bucketing Logic</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="fragment" data-fragment-index="1">
+          <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Grouping</span>
+          <p class="text-xl text-slate-300">Map dates to YYYY-MM strings to create logical containers.</p>
+        </div>
+        <div class="fragment" data-fragment-index="2">
+          <span class="text-orange-400 font-bold uppercase text-xs tracking-widest">Uniqueness</span>
+          <p class="text-xl text-slate-300">Use a <code>Map</code> to ensure only the LAST index of each month is kept.</p>
+        </div>
+        <div class="fragment" data-fragment-index="3">
+          <span class="text-yellow-400 font-bold uppercase text-xs tracking-widest">Result</span>
+          <p class="text-xl text-slate-300">Convert the map back to an array of valid label indices.</p>
+        </div>
+      </div>
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <div class="fragment fade-in-then-out w-full" data-fragment-index="1">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="2">
+const getMonthBucketLastIndexes = (data: IFundHistory[]): number[] =>
+  getDateBucketLastIndexes(data, (date) => date.format('YYYY-MM'));
+          </code></pre>
+        </div>
+        <div class="fragment fade-in w-full" data-fragment-index="2">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="6-10">
+const getDateBucketLastIndexes = (data, formatter) => {
+  const buckets = new Map<string, number>();
+
+  data.forEach((item, index) => {
+    const key = formatter(dayjs(item.navDate));
+    // Overwrites previous index, leaving only the LAST one for the bucket
+    buckets.set(key, index);
+  });
+
+  return Array.from(buckets.values());
+};
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

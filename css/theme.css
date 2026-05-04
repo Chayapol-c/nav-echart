@@ -11,6 +11,7 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 40px; /* Increased base font size */
 }
 
 .reveal-viewport {
@@ -21,32 +22,75 @@
     color: var(--heading-color);
     text-transform: none;
     font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.8em;
+    width: 100%;
 }
+
+.reveal h1 { font-size: 3.5em; }
+.reveal h2 { font-size: 2.2em; }
+.reveal h3 { font-size: 1.6em; }
 
 .reveal h1 { color: var(--accent-color); }
 
 .reveal .slides section {
     text-align: left;
-    padding: 40px;
+    padding: 60px 40px;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.reveal .slides section li {
+    margin-bottom: 0.5em;
 }
 
 .reveal pre {
-    background: var(--code-bg);
-    border-radius: 8px;
+    /* background: var(--code-bg); */
+    /* border-radius: 8px; */
     box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
     width: 100%;
 }
 
 .reveal code {
     font-family: 'Fira Code', 'Source Code Pro', monospace;
-    font-size: 0.85em;
+    font-size: 0.5em;
     line-height: 1.4;
 }
 
+/* Layout Utilities */
 .slide-grid {
+  display: grid;
+  grid-template-cols: 1fr 1fr;
+  gap: 2rem;
+  text-align: left;
+}
+
+/* Fragment Visibility Fix */
+.reveal .slides section .fragment.visible:not(.current-fragment) {
+  opacity: 1;
+  visibility: inherit;
+}
+
+/* Ensure side-by-side content stays visible during code highlights */
+.grid .fragment.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.slide-grid-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.slide-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     align-items: start;
 }
 

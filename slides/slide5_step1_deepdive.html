@@ -1,0 +1,92 @@
+<section>
+  <!-- 5.0: Step 1 Orchestration -->
+  <section>
+    <h3 class="text-teal-300 mb-8">Step 1: The Ideal Path</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="p-6 bg-teal-900/20 border-l-4 border-teal-500">
+          <h4 class="text-teal-400 font-bold mb-2 uppercase tracking-widest text-sm">Logic</h4>
+          <p class="text-xl">Project month gaps backward to keep labels calendar-aligned.</p>
+        </div>
+        <div class="bg-blue-500 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
+          ↓ Press Down for Detail
+        </div>
+      </div>
+      <div class="col-span-8 overflow-x-auto">
+        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
+const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
+  // Step 1: Attempt to get natural gaps
+  const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
+
+  // ... rest of the code on next slides
+};
+        </code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5.1: Deep Dive Detail -->
+  <section data-visibility="uncounted">
+    <h3 class="text-blue-400 mb-8 italic">Step 1.1: Reverse Lookup Logic</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="fragment" data-fragment-index="1">
+          <span class="text-blue-400 font-bold uppercase text-xs tracking-widest">Anchor</span>
+          <p class="text-xl">Start from the latest NAV date point.</p>
+        </div>
+        <div class="fragment" data-fragment-index="2">
+          <span class="text-indigo-400 font-bold uppercase text-xs tracking-widest">Project</span>
+          <p class="text-xl text-slate-300">Subtract intervals (T-4, T-8) to find keys.</p>
+        </div>
+        <div class="fragment" data-fragment-index="3">
+          <span class="text-purple-400 font-bold uppercase text-xs tracking-widest">Verify</span>
+          <p class="text-xl text-slate-300">Filter unique indices & valid months.</p>
+        </div>
+      </div>
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <div class="fragment fade-in-then-out w-full" data-fragment-index="1">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
+const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
+  // Always anchor to the most recent data point
+  const lastDate = dayjs(data[data.length - 1].navDate);
+
+  const indexes = Array.from({ length: count }, (_, pointIndex) => {
+    const revIndex = count - pointIndex - 1;
+    const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
+    return findLastIndexByMonthKey(data, monthKey);
+  });
+};
+          </code></pre>
+        </div>
+        <div class="fragment fade-in-then-out w-full" data-fragment-index="2">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="7">
+const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
+  const lastDate = dayjs(data[data.length - 1].navDate);
+  const indexes = Array.from({ length: count }, (_, pointIndex) => {
+    const revIndex = count - pointIndex - 1;
+    // Calculate historical month keys
+    const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
+    return findLastIndexByMonthKey(data, monthKey);
+  });
+};
+          </code></pre>
+        </div>
+        <div class="fragment fade-in w-full" data-fragment-index="3">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="11-13">
+const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
+  const lastDate = dayjs(data[data.length - 1].navDate);
+  const indexes = Array.from({ length: count }, (_, pointIndex) => {
+    const revIndex = count - pointIndex - 1;
+    const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
+    return findLastIndexByMonthKey(data, monthKey);
+  })
+  .filter(v => v !== undefined);
+
+  return [...new Set(indexes)]; // Ensure unique indices
+};
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
