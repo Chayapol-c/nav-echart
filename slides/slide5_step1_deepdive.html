@@ -49,17 +49,18 @@ const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number):
 const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
   // ยึดกับจุดข้อมูลล่าสุดเสมอ
   const lastDate = dayjs(data[data.length - 1].navDate);
-
   const indexes = Array.from({ length: count }, (_, pointIndex) => {
     const revIndex = count - pointIndex - 1;
     const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
     return findLastIndexByMonthKey(data, monthKey);
   });
+
+  return indexes;
 };
           </code></pre>
         </div>
         <div class="fragment fade-in-then-out w-full" data-fragment-index="2">
-          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="7">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="6-7">
 const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
   const lastDate = dayjs(data[data.length - 1].navDate);
   const indexes = Array.from({ length: count }, (_, pointIndex) => {
@@ -68,11 +69,13 @@ const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
     const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
     return findLastIndexByMonthKey(data, monthKey);
   });
+
+  return indexes;
 };
           </code></pre>
         </div>
         <div class="fragment fade-in w-full" data-fragment-index="3">
-          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="11-13">
+          <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="8,10">
 const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
   const lastDate = dayjs(data[data.length - 1].navDate);
   const indexes = Array.from({ length: count }, (_, pointIndex) => {
