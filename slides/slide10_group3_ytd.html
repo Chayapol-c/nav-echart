@@ -41,7 +41,7 @@ export const shouldShowXAxisLabelYTD = (index, data) => {
 
   <!-- 10.1: Month Key Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-amber-300 mb-8 italic">ขั้นตอนที่ 3.1: การนำการค้นหาด้วยคีย์เดือนมาใช้</h3>
+    <h3 class="text-amber-300 mb-8 italic">Group 3.1: การนำการค้นหาด้วยคีย์เดือนมาใช้</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
@@ -57,8 +57,50 @@ export const shouldShowXAxisLabelYTD = (index, data) => {
           <p class="text-xl text-slate-300">ส่งคืนผลลัพธ์แรกที่พบทันที เพื่อให้แน่ใจว่าได้ราคา "ปิด" ของเดือนนั้น</p>
         </div>
       </div>
-      <div class="col-span-8 overflow-x-auto">
-        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="4-8">
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <!-- Step 1: Key Generation -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="1"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="4">
+const findLastIndexByMonthKey = (data, monthKey) => {
+  // เริ่มต้นจากท้ายอาร์เรย์
+  for (let index = data.length - 1; index >= 0; index -= 1) {
+    const currentKey = dayjs(data[index].navDate).format('YYYY-MM');
+
+    if (currentKey === monthKey) {
+      return index; // พบวันซื้อขายวันสุดท้ายของเดือน
+    }
+  }
+
+  return undefined; // ไม่พบเดือนในข้อมูล
+};
+        </code></pre>
+
+        <!-- Step 2: Backward Scan -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="2"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
+const findLastIndexByMonthKey = (data, monthKey) => {
+  // เริ่มต้นจากท้ายอาร์เรย์
+  for (let index = data.length - 1; index >= 0; index -= 1) {
+    const currentKey = dayjs(data[index].navDate).format('YYYY-MM');
+
+    if (currentKey === monthKey) {
+      return index; // พบวันซื้อขายวันสุดท้ายของเดือน
+    }
+  }
+
+  return undefined; // ไม่พบเดือนในข้อมูล
+};
+        </code></pre>
+
+        <!-- Step 3: Efficiency -->
+        <pre
+          class="m-0 fragment fade-in w-full"
+          data-fragment-index="3"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="7">
 const findLastIndexByMonthKey = (data, monthKey) => {
   // เริ่มต้นจากท้ายอาร์เรย์
   for (let index = data.length - 1; index >= 0; index -= 1) {
