@@ -34,7 +34,7 @@ export const shouldShowXAxisLabel1M = (data, index) => {
 
   <!-- 9.1: Inset Math Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-blue-300 mb-8 italic">ขั้นตอนที่ 2.1: การนำการคำนวณแบบขอบในมาใช้</h3>
+    <h3 class="text-blue-300 mb-8 italic">Group 2.1: การนำการคำนวณแบบขอบในมาใช้</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
@@ -50,8 +50,50 @@ export const shouldShowXAxisLabel1M = (data, index) => {
           <p class="text-xl text-slate-300 italic">"การประมาณค่าเชิงเส้นผ่านดัชนีช่วยให้มั่นใจว่าป้ายชื่อจะอยู่ตรงกลางพอดีกับข้อมูล"</p>
         </div>
       </div>
-      <div class="col-span-8 overflow-x-auto">
-        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="7-9">
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <!-- Step 1: Inset Padding -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="1"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="1">
+const getInsetEvenlySpacedIndexes = (indexes, labelCount, insetRatio = 0.05) => {
+  const lastIndex = indexes.length - 1;
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    // คณิตศาสตร์: ประมาณค่าเชิงเส้นระหว่าง [inset] และ [1 - inset]
+    const positionRatio =
+      insetRatio + ((1 - insetRatio * 2) * pointIndex) / (labelCount - 1);
+
+    const targetIndex = Math.round(lastIndex * positionRatio);
+    return indexes[targetIndex];
+  });
+};
+        </code></pre>
+
+        <!-- Step 2: Ratio Math -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="2"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="6-7">
+const getInsetEvenlySpacedIndexes = (indexes, labelCount, insetRatio = 0.05) => {
+  const lastIndex = indexes.length - 1;
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    // คณิตศาสตร์: ประมาณค่าเชิงเส้นระหว่าง [inset] และ [1 - inset]
+    const positionRatio =
+      insetRatio + ((1 - insetRatio * 2) * pointIndex) / (labelCount - 1);
+
+    const targetIndex = Math.round(lastIndex * positionRatio);
+    return indexes[targetIndex];
+  });
+};
+        </code></pre>
+
+        <!-- Step 3: Interpolation -->
+        <pre
+          class="m-0 fragment fade-in w-full"
+          data-fragment-index="3"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="9-10">
 const getInsetEvenlySpacedIndexes = (indexes, labelCount, insetRatio = 0.05) => {
   const lastIndex = indexes.length - 1;
 
