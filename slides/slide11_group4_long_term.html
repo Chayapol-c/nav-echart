@@ -33,7 +33,7 @@ export const shouldShowXAxisLabel5Y = (index, data) => {
 
   <!-- 11.1: Year Logic Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-purple-300 mb-8 italic">ขั้นตอนที่ 4.1: ตรรกะจุดยึดรายปี</h3>
+    <h3 class="text-purple-300 mb-8 italic">Group 4.1: ตรรกะจุดยึดรายปี</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
@@ -48,8 +48,30 @@ export const shouldShowXAxisLabel5Y = (index, data) => {
           ↓ กดลงต่อเพื่อดูการนำไปใช้งาน
         </div>
       </div>
-      <div class="col-span-8 overflow-x-auto">
-        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="6-9">
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <!-- Step 1: Alignment -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="1"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
+const getLatestYearLabelIndexes = (data, labelCount) => {
+  const lastDate = dayjs(data[data.length - 1].navDate);
+  const targetMonth = lastDate.month();
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    const revIndex = labelCount - pointIndex - 1;
+    const year = lastDate.year() - revIndex;
+    // เจาะลึก: เราจะหาดัชนีสำหรับปีนี้ได้อย่างไร?
+    return findLastIndexByYear(data, year, targetMonth);
+  }).filter(v => v !== undefined);
+};
+        </code></pre>
+
+        <!-- Step 2: Year Projection -->
+        <pre
+          class="m-0 fragment fade-in w-full"
+          data-fragment-index="2"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="6-7">
 const getLatestYearLabelIndexes = (data, labelCount) => {
   const lastDate = dayjs(data[data.length - 1].navDate);
   const targetMonth = lastDate.month();
@@ -68,7 +90,7 @@ const getLatestYearLabelIndexes = (data, labelCount) => {
 
   <!-- 11.2: Year Finder Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-indigo-300 mb-8 italic">ขั้นตอนที่ 4.2: การนำ findLastIndexByYear มาใช้</h3>
+    <h3 class="text-indigo-300 mb-8 italic">Group 4.2: การนำ findLastIndexByYear มาใช้</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
@@ -84,8 +106,58 @@ const getLatestYearLabelIndexes = (data, labelCount) => {
           <p class="text-xl text-slate-300">หากไม่พบเดือนนั้น (วันหยุด) ให้ส่งคืนวันที่ล่าสุดที่มีอยู่ในปีนั้น</p>
         </div>
       </div>
-      <div class="col-span-8 overflow-x-auto">
-        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="4-12">
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <!-- Step 1: Reverse Search -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="1"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="4">
+const findLastIndexByYear = (data, year, targetMonth) => {
+  let fallbackIndex: number | undefined;
+
+  for (let index = data.length - 1; index >= 0; index -= 1) {
+    const date = dayjs(data[index].navDate);
+
+    if (date.year() !== year) continue;
+    fallbackIndex = fallbackIndex ?? index; // ติดตามรายการล่าสุดที่พบในปีนั้น
+
+    if (date.month() === targetMonth) {
+      return index; // พบเดือนที่ตรงกันพอดี!
+    }
+  }
+
+  return fallbackIndex; // ใช้ข้อมูลล่าสุดที่มีอยู่ในปีนั้น
+};
+        </code></pre>
+
+        <!-- Step 2: Month Match -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="2"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="10-12">
+const findLastIndexByYear = (data, year, targetMonth) => {
+  let fallbackIndex: number | undefined;
+
+  for (let index = data.length - 1; index >= 0; index -= 1) {
+    const date = dayjs(data[index].navDate);
+
+    if (date.year() !== year) continue;
+    fallbackIndex = fallbackIndex ?? index; // ติดตามรายการล่าสุดที่พบในปีนั้น
+
+    if (date.month() === targetMonth) {
+      return index; // พบเดือนที่ตรงกันพอดี!
+    }
+  }
+
+  return fallbackIndex; // ใช้ข้อมูลล่าสุดที่มีอยู่ในปีนั้น
+};
+        </code></pre>
+
+        <!-- Step 3: Smart Fallback -->
+        <pre
+          class="m-0 fragment fade-in w-full"
+          data-fragment-index="3"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="8,15">
 const findLastIndexByYear = (data, year, targetMonth) => {
   let fallbackIndex: number | undefined;
 
