@@ -1,17 +1,40 @@
 <section>
-  <h2 class="text-teal-400">The Challenge: Financial Time Gaps</h2>
-  <div class="slide-grid items-center">
+  <h2>The Challenge: Financial Time Gaps</h2>
+  <div class="">
     <div class="text-left">
-      <ul class="space-y-4">
-        <li class="fragment text-slate-300">Non-continuous NAV data (Weekends/Holidays).</li>
-        <li class="fragment text-amber-300">"Time" axes create misleading visual gaps.</li>
-        <li class="fragment text-red-400">Standard "Category" axes distort temporal distance.</li>
+      <ul class="space-y-4 text-4xl/normal">
+        <li class="text-slate-300 text-4xl/normal">
+          ข้อมูลของ NAV มันไม่ต่อเนื่องกันเพราะมีวันหยุด.
+        </li>
+        <li class="text-slate-300 text-4xl/normal">
+          <strong> Time </strong>
+          axes create misleading visual gaps.
+        </li>
+        <li class="text-slate-300 text-4xl/normal">
+          Standard <strong>Category</strong> axes distort temporal distance.
+        </li>
+        <li class="text-slate-300 text-4xl/normal">
+          การแสดงผล Labels แกน x ต้องมีระยะห่างเท่ากันบนหน้าจอ
+          และสามารถเป็นวันที่ไม่อยู่ใน data NAV ก็ได้
+        </li>
       </ul>
-    </div>
-    <div class="fragment bg-slate-800 p-8 rounded-lg border-l-4 border-teal-500 text-left">
-      <p class="text-2xl italic text-slate-300">
-        "We need a chart that respects time distance but ignores non-trading days."
-      </p>
+      <div class="flex gap-4 mt-8">
+        <a
+          href="https://echarts.apache.org/examples/en/editor.html?c=dynamic-data2&code=7Vptb9zGEf6uX7EVYB8vks5355cqkmXAgOrCgA0bdYsiEPSBkiiJDUUKPF7sQyKgSYsmbf2tTYIkQNDEDYwkCJD3UP-GPyXPzHCXuyTvdEaQIEEknO6Oy9nZmWded3lRkKk4eag2VBw8VJt-FniLw_7w2kr_6kr_8mJ3fWE3iUeZuv-7P9y-twmyzuCFzvoCTUviYNOfYGh4RT2nLl_r9_Ex6Pf75vYLgZ_ePEhs5lirdxBkfwyPAq-rVjDtKmYJq-66unRJFfnTIv-iyN_h1zfF6T-L078W-QdF_l1x-kaRf1bk79F4_jbffaM4fbXIPyKy_Ckv_JIfjQOsedfPDnupH-8lR1hKi7awP453szCJldyCVL4XxnvBo656eUGJBH8v8q94eYjynyJ_i1f9sMg_pZVIuNeLHKJ8WeSvqsUif5PvVwIvgg9JsjtO0yDOSPFZGJRAPqdEDMgo0_f8yb39PwfBi5hssaK5oPdAqFS4rzyLbmND9dUrr9hTMXStq9IgG6exisdRxPw1SPK51ABrOIBgA8JL6bmEjlKxfxSsOeJkyYMsDeMDr7vMFMxyTW3xhTKfqq7DLchCHqLntZDcTeLsEPIsqcFUGoa0W97d7v0lCWOvc6ljmIpmyTje81gyId3G-8n6wskCu8wenABgbG1DX8tDwP1-kIbJ3p0gPmBBCAOCXIcDwKWAkBsGKTg12eZEBdEoaNBfu1unH6wC6Kn0lxv0z88iHzTIL8_k3pB-0H9-lvhXmxNWhzKB4NxPUuURpiEA7a_j43oTRwwvLQkXIk2DEYjteDS-jVtdNk_veDw65Eu2GoUppYUnnAoQmlVEcjD-l8ffLE4RykgXeCFqQYBXXuTvSoZZYMajJM08z19WO121caMKU7_H_rLV36YgNcM71TCFKqXHJAp6UXKAQAS7iHWkW8kxe9EG65mFWYSoEOCy4FG2pjqbE0RTuEt8fXVRUUJQNx-Fow6BSf6bJUmUhcdmWhoeHAQpZvpEJR4OwI_8LKNh47jesZ_6R0BO5ikl1xBFvkB4AliiNSV8nQQlRD0KdTaEZWvPhCFNquJPLZkbCD7rikCpx_J0ak1c5QabVEFz67oUU8wxoIimv1Jixk8pAuo-UgLjo9Hw4xCQAShA5sPHZYIG_RGZwEA-OYbVOruQ6yBJJ8Cch0fHUZjdCWNjUQwdJg8dfpUAd_ydIKooWy0mucnQtKSZKq7lr0xcjuWEi7YZ_XGgICY-4Zh43S6vZQGFRTiUcPs7KWTK44F_cb19Rw1X1c3jdBlxTp861bY6xUzHEBvaFuSCAtlvx1nUI3oKgVsMj9cJ4pU_Pegsq5fVEbkOrACI06yjTro9gZB9y5bH0hw5YhqSSHlUI6cktWcBV1fVM1VwNJ7AsaFNPD5CUtylYDdCu5q1ajOPZHPLNR1aSypazVyaVeDf5bfDcC-491KQRj4yVZaOg2Xpot7jpgwOhdwMD2Sno3z8AXdtf6N2igjQ2Yk__lv3d_iOlgqDcFW0XLiUlgs-zB5KzklstQAc3sDAjifupZalGbFNO6Mvq6NokXLyarZhZU6TvtWNoSJ_Tev-msYBmp5yBylVCMRlw-gsifZQL2dE6565WnuFq0Vykb9f5P8v8o-L_H9cLMkaWOdKt_IvMEctC3fXQA3wQYQa-znXWLzDZFJmoZeMg-ZpNTifWNof3p0fNFs-dh7oBAK4BO7CW56Uqs6ByUqbrdzVqEoNu-oC3t2FMQ8Qmp0IeIDc6G-joz2evsg-xV2TkjIkwgteDjKgiXFc0u7GDXcO0s1wfx-mot2DuMeK65yVxNy0Tyki9TzHgfoWaz9FfhIbkYwRKRmQFp0VHAeKY29UGkxdUV5_WV1ZVqtdp-BU6NiM6vjrvRx1bHbOIO-zpCV1KjAuYFHe8bgqVZaCi4ANRG0TwQQhCQvw8a6dry4dJyCSC4L_o-EEjZSmuN4DV_D7tpxHyQ1fsKuEqlgWq-k6TNMaiJSX0tuCsrSGoyahwWkOLbbVetLGrY5ImVnQdtaTHk3cEi7woG236avVE8fffgPkNUM7OzlTqalqsKESYZPZRCUJt1FzFXNrN9XuI8OfxkfMaQTGxS3IrOpmmvqTc6vN2NO2W23wM7MaFh721J2yMJ4lAh0KmRqPRChf3tZpFiHdLtCilLZSACnAUECanjLNNPEAL7AA0zJhNspSswEx7RWOtvAFUNE-WTsmb9FKfYhaUjMWaKap6uzNEZaIqWf7ZXs-F0eYD1lbdOOWZT7Llib0KPNTFcAkcRfBx2zC2nsUgl83yPbuLSorCwwmmH_4o4dq674zSzI_4n01HSpYxrR6j_azVLgTLqGMtH_Gd6XJF3TlFMf4aCvM5kyWPbCcC__-0l3fsyVlRzNGkONWKdPScJxhlBoGaYA9zyi4zVw2HEiwEP6ZfwMQ25y6UdA9AbqL3-LSONjUJtjY0RHiAmZz2px3GzzFsK5JSRvbm55hByXEkT9qD2NezIRwXRI_1VGKiZpH6z4I6GBHI35Rt5KwkQcVNhPZVjGP4WrNRoNerYVtFBTJe7T9mZkMSDiMQ77ParVOfM-c11eXjIk5r5dIdqXTdcjsz4wIppohdejETCLA4c0haeP0B6c7VgiY7pR3Ia7MUw7nWerKWPVU7rgLWaH1_N5Rckadbz4casmpjmpnVSVOUmJXpCfg1MrG6S8MBXiDJYFfNgVgIgb5fIr49Z1_lY3QMhi-oDIiPClOH1udjNkpva93Fu1qUypEO3FmB-EYFuYxxqQHco2qPKXAOHlmflBL_0WcSPfR2CIidrihOX28wvbDBeZ_zbUBsx531-b0GlNLELrmjImPlspYne5E18X-JuANqzkc8IbM_eEbvBvNVlgi6xgFYEaLhNQ9pUUi3rUhnKiX3GaEt7p4cea08tT3upV4W2ZYHnejoqyRNTWe4YD13s2-cpzzmRug1rPh8zp5XifP6-R5nTyvk-d18tdVJ83Tv-qx990wLh9xM7V4dfU0T59aVMEJ34AvIfTOPPc3T-UnLU_luYyWP4PYoV_4-Onk9_QQcguPIjr4vdeFzrbcned5vV5phKeyAZaSHy5pcvndU-eW_2LAv9colzWyRGBuxoj3g8nRTqIh0TfI5db43ay5vXCy_j0&enc=deflate"
+          target="_blank"
+          class="p-4 text-teal-400 border border-teal-500"
+        >
+          Demo 1 (Category)
+        </a>
+
+        <a
+          href="https://echarts.apache.org/examples/en/editor.html?c=dynamic-data2&lang=ts&code=lVZRaxtHEH7Xrxj80LuLbPlOrk0iVYWAGzBY2DSFEoweVtJK2uZuV-ytYolE0ECh6XNpS-lTCyUPpQ9tKT3_m_0pndnVna5W7BJjdL7Zb2a--WZm5ZGSuYHLTz49uzjtQG60kFPoQZA8C7qNhpCG6wkbcThlhp0ZnsHLBoBkGS_BXXx_wdIFGq68ZR_kIhtyPeg21o1Gyg1IdY0xJb-mMDwM2nH75CA-PoiPgqjrEEryU7ZCUPtDeABHJ3GMjySO4-r4GWf68VTV42DY1pSbz0TGwwgO0O0YvXyoqAuHh2CLt7b4wxY_ut-_7c039uZLW_xsi3_szRtb_G6Ln8he_OBO39ib17b4lWDFW5fYVYY5-8zMWprJscowVUmtMVnIkRFKgj8ikUIhx3wZOZ0cg69s8ZdLj1S-tcX3LusvtviNMhG5r22BVP60xWvYs8V37nxLeA_jEJPRQmsuDRV-nwYbIR-Ap4EcvfuYrS4mn3P-HJ1rocgX8SECAcQEwhqu14MYXr2qu6LpJALNzUJL7HKauvilSP7Z3BGrnSCxhPSC0pfUKeeoTseop26GwmjfIcrJci9QPeF2DU-QC01I6fcOSF9JM0M-TUjuxDhJo83poPWFEjIMDoMqqK9MLeQ4dMw8dICf62rYxzgEKMYVjv92PjD2JddCjc-5nDoapAAJ7lfPSUtL5w8qnXCkqTNr4GnOd_An_dv45CHKfCf-aAf_6D54sgM_ujf6DvskfnQf_eNdh4dt70BiTpSGkBQVKGfcxcdHuzqiudn0UQiqeY7g-jZWk41HkWtOa77IZ-7V9cyZcqVNGLJ9GEbQ-3i7Xqzl-nwVD2i5KvNwa6YVo0tUpbyVqikuEIZLHTs6UnPX_55jaIRJcZp9yYYvTQeC0xVugRi5CxY-AFpkeLwUeUAy0NwZpVIj5pWbFtMp1-jJCOUnE6XKmMG7ugPVyIVzplmWd4DJVSkzgDciH_8HVkD6-FXTJM9_bhcPatGeOh1rrQqrHSKn7fJAszrAzam9kTK3F_FudAneLnYdClh-7X1D0_ckoXWknw1jJyIAqXWJ--xEKtVgUqBuqBbqxnBEvUOp_JL6UOm-mmPr9gz2Z89HzIQ8o3CYtlP_yqIbj77Fkna8Dx7Jlv-LrEiesyFHWEmx1trgZb_fX29avilrJsb84gXXKcMJMXrBvTmfp8KcC1lNG5pm6vqdZa52ywyclJtM7xMrx-XkGMxf1CXc3_PBE_bc_yOxCVxlSzF4ZaPYT1fZUKEILkN5QJvVcZ9VzkFj3f0X&enc=deflate"
+          target="_blank"
+          class="p-4 text-rose-400 border border-rose-500"
+        >
+          Demo 2 (Time)
+        </a>
+      </div>
     </div>
   </div>
 </section>

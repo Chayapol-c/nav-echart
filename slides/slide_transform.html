@@ -1,0 +1,171 @@
+<section>
+  <h3 class="text-teal-400 mb-8 font-bold text-4xl">
+    Transform function
+  </h3>
+  <div class="grid grid-cols-12 gap-8 text-left">
+    <!-- Explanation -->
+    <div class="col-span-5 space-y-6">
+      <div class="fragment space-y-4" data-fragment-index="0">
+        <h4
+          class="font-bold text-teal-400 mb-2 uppercase text-xs tracking-widest"
+        >
+          1. Strategy Selection
+        </h4>
+        <p class="text-lg text-slate-300 italic">
+          Determines if we need high-precision <code>value</code> mapping based
+          on fund history duration.
+        </p>
+      </div>
+      <div class="fragment space-y-4" data-fragment-index="1">
+        <h4 class="text-amber-400 font-bold uppercase text-xs tracking-widest">
+          2. Physical Anchors
+        </h4>
+        <p class="text-lg text-slate-400">
+          Calculates exact pixel positions for labels to bypass ECharts' default
+          "Nice Ticks" spacing logic.
+        </p>
+      </div>
+
+      <div class="fragment space-y-4" data-fragment-index="2">
+        <h4 class="text-blue-400 font-bold uppercase text-xs tracking-widest">
+          3. Data Interpolation
+        </h4>
+        <p class="text-lg text-slate-400">
+          Maps each data point to a mathematical <code>xValue</code>, ensuring
+          smooth curves even across weekend gaps.
+        </p>
+      </div>
+    </div>
+
+    <!-- Code Block -->
+    <div class="col-span-7">
+      <div
+        class="bg-slate-900/90 rounded-xl border border-slate-700 shadow-2xl h-[500px] r-stack items-start overflow-y-auto"
+      >
+        <pre
+          class="m-0"
+        ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers>
+export const transformChartData = (navHistory, timeFrame) => {
+  // Step 1: Detect history context & select labels
+  const { isMoreThanOneYear } = checkHistory(navHistory);
+  const labels = getStrategyLabels(navHistory, timeFrame);
+
+  // Step 2: Calculate Value Anchors (if needed)
+  const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
+
+  const xAxis = {
+    // The "Magic" Switch: Force value axis for precision
+    type: anchors.length > 0 ? 'value' : 'category',
+    axisLabel: { formatter: formatLabel }
+  };
+
+  // Step 3: Interpolate Points
+  const data = navHistory.map((item, index) => ({
+    ...item,
+    ...(anchors.length > 0 && {
+      xValue: getInterpolatedXValue(index, anchors)
+    }),
+  }));
+
+  return { xAxis, data };
+};
+        </code></pre>
+        <!-- Step 1: Initialization -->
+        <pre
+          class="m-0 fragment fade-in-then-out"
+          data-fragment-index="0"
+        ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="2-4">
+export const transformChartData = (navHistory, timeFrame) => {
+  // Step 1: Detect history context & select labels
+  const { isMoreThanOneYear } = checkHistory(navHistory);
+  const labels = getStrategyLabels(navHistory, timeFrame);
+
+  // Step 2: Calculate Value Anchors (if needed)
+  const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
+
+  const xAxis = {
+    // The "Magic" Switch: Force value axis for precision
+    type: anchors.length > 0 ? 'value' : 'category',
+    axisLabel: { formatter: formatLabel }
+  };
+
+  // Step 3: Interpolate Points
+  const data = navHistory.map((item, index) => ({
+    ...item,
+    ...(anchors.length > 0 && {
+      xValue: getInterpolatedXValue(index, anchors)
+    }),
+  }));
+
+  return { xAxis, data };
+};
+        </code></pre>
+
+        <!-- Step 2: The Magic Switch -->
+        <pre
+          class="m-0 fragment fade-in-then-out"
+          data-fragment-index="1"
+        ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="7,10-11">
+export const transformChartData = (navHistory, timeFrame) => {
+  // Step 1: Detect history context & select labels
+  const { isMoreThanOneYear } = checkHistory(navHistory);
+  const labels = getStrategyLabels(navHistory, timeFrame);
+
+  // Step 2: Calculate Value Anchors (if needed)
+  const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
+
+  const xAxis = {
+    // The "Magic" Switch: Force value axis for precision
+    type: anchors.length > 0 ? 'value' : 'category',
+    axisLabel: { formatter: formatLabel }
+  };
+
+  // Step 3: Interpolate Points
+  const data = navHistory.map((item, index) => ({
+    ...item,
+    ...(anchors.length > 0 && {
+      xValue: getInterpolatedXValue(index, anchors)
+    }),
+  }));
+
+  return { xAxis, data };
+};
+        </code></pre>
+
+        <!-- Step 3: Interpolation -->
+        <pre
+          class="m-0 fragment fade-in"
+          data-fragment-index="2"
+        ><code class="typescript text-[0.45em] leading-tight" data-trim data-noescape data-line-numbers="18-20">
+export const transformChartData = (navHistory, timeFrame) => {
+  // Step 1: Detect history context & select labels
+  const { isMoreThanOneYear } = checkHistory(navHistory);
+  const labels = getStrategyLabels(navHistory, timeFrame);
+
+  // Step 2: Calculate Value Anchors (if needed)
+  const anchors = getXAxisValueAnchors(labels, navHistory.length - 1);
+
+  const xAxis = {
+    // The "Magic" Switch: Force value axis for precision
+    type: anchors.length > 0 ? 'value' : 'category',
+    axisLabel: { formatter: formatLabel }
+  };
+
+  // Step 3: Interpolate Points
+  const data = navHistory.map((item, index) => ({
+    ...item,
+    ...(anchors.length > 0 && {
+      xValue: getInterpolatedXValue(index, anchors)
+    }),
+  }));
+
+  return { xAxis, data };
+};
+        </code></pre>
+      </div>
+      <p class="text-xs text-slate-500 mt-4 italic text-right font-mono">
+        Simplified for clarity. Full logic in inquiryGraphFundDetail.ts
+      </p>
+    </div>
+  </div>
+</section>

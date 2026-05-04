@@ -1,29 +1,126 @@
 <section>
-  <h3 class="mb-8">Evolution: The Road to <code>type: 'value'</code></h3>
-  <div class="grid grid-cols-2 gap-8 text-left">
-    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-      <span class="text-red-400 font-bold uppercase text-xs tracking-widest"
-        >❌ Category Axis</span
-      >
-      <p class="text-lg mt-2 text-slate-400 italic">
-        Temporal distance is ignored.
-      </p>
+  <!-- 3.0: Overview -->
+  <section>
+    <h3 class="mb-8 font-bold">
+      Evolution: The Road to <code>type: 'value'</code>
+    </h3>
+    <table class="text-lg w-full border-collapse table-auto">
+      <thead>
+        <tr class="border-2 border-solid border-slate-600">
+          <th
+            class="p-4 text-left text-slate-400 uppercase text-sm tracking-widest"
+          >
+            Requirement
+          </th>
+          <th
+            class="p-4 text-center text-red-400 uppercase text-sm tracking-widest"
+          >
+            Category
+          </th>
+          <th
+            class="p-4 text-center text-amber-400 uppercase text-sm tracking-widest"
+          >
+            Time
+          </th>
+          <th
+            class="p-4 text-center text-teal-400 font-bold uppercase text-sm tracking-widest"
+          >
+            Value (Manual)
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-slate-300">
+        <tr
+          class="border-2 border-solid border-slate-700/50 hover:bg-slate-800/30 transition-colors"
+        >
+          <td class="p-4 font-bold text-slate-100">Equal Spacing</td>
+          <td class="p-4 text-center">Easy (Default)</td>
+          <td class="p-4 text-center text-red-300/80">Hard (Gaps Skew)</td>
+          <td
+            class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
+          >
+            Perfect Precision
+          </td>
+        </tr>
+        <tr
+          class="border-2 border-solid border-slate-700/50  hover:bg-slate-800/30 transition-colors"
+        >
+          <td class="p-4 font-bold text-slate-100">Label Count (e.g. 1Y)</td>
+          <td class="p-4 text-center">Hard (Index math)</td>
+          <td class="p-4 text-center text-amber-300/80">
+            "Nice Ticks" Override
+          </td>
+          <td
+            class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
+          >
+            100% Reliable
+          </td>
+        </tr>
+        <tr
+          class="border-2 border-solid border-slate-700/50 hover:bg-slate-800/30 transition-colors"
+        >
+          <td class="p-4 font-bold text-slate-100">Holiday Handling</td>
+          <td class="p-4 text-center text-slate-500">No Gaps (Inaccurate)</td>
+          <td class="p-4 text-center">Visible Gaps</td>
+          <td
+            class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
+          >
+            Dynamic / Optional
+          </td>
+        </tr>
+      </tbody>
+      <caption class="caption-bottom italic text-slate-300">
+        Feature matrix table
+      </caption>
+    </table>
+    <!-- </div> -->
+  </section>
+
+  <!-- 3.2: Technical "Why" -->
+  <section data-visibility="uncounted">
+    <h3 class="text-blue-400 mb-8 font-bold">Why Value + Manual?</h3>
+    <div class="grid grid-cols-2 gap-12 text-left">
+      <div class="space-y-6">
+        <div>
+          <h4
+            class="text-amber-400 font-bold uppercase text-xs tracking-widest mb-2"
+          >
+            The "Nice Ticks" Problem
+          </h4>
+          <p class="text-xl text-slate-300 leading-relaxed">
+            ECharts' <code>type: 'time'</code> algorithm favors human-readable
+            intervals over developer intent. If it decides 4 ticks look "nicer"
+            than 3, it will
+            <span class="text-amber-400 italic">silently override</span> your
+            configuration.
+          </p>
+        </div>
+        <div
+          class="p-4 bg-slate-900/50 border-l-4 border-amber-500 italic text-slate-400 text-lg"
+        >
+          "Result: Non-deterministic UI layouts."
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div>
+          <h4
+            class="text-teal-400 font-bold uppercase text-xs tracking-widest mb-2"
+          >
+            The Manual Advantage
+          </h4>
+          <p class="text-xl text-slate-300 leading-relaxed">
+            By treating the axis as a mathematical range (0-100 or Timestamp),
+            we "anchor" labels to specific points:
+            <code class="text-teal-300">[min, mid, max]</code>.
+          </p>
+        </div>
+        <div
+          class="p-4 bg-slate-900/50 border-l-4 border-teal-500 text-slate-300 text-lg"
+        >
+          We use a <strong>Custom Formatter</strong> to map numeric positions
+          back to calendar months with 100% certainty.
+        </div>
+      </div>
     </div>
-    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-      <span class="text-amber-400 font-bold uppercase text-xs tracking-widest"
-        >⚠️ Time Axis</span
-      >
-      <p class="text-lg mt-2 text-slate-400 italic">
-        Skips labels on missing dates.
-      </p>
-    </div>
-  </div>
-  <div
-    class="mt-8 bg-teal-900/30 p-6 rounded-lg border border-teal-500 fragment"
-  >
-    <span class="text-teal-400 font-bold uppercase text-xs tracking-widest"
-      >✅ Value Axis (Unix Timestamp)</span
-    >
-    <p class="text-2xl mt-2">Precision positioning + Manual tick labeling.</p>
-  </div>
+  </section>
 </section>

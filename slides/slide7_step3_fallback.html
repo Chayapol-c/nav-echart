@@ -1,15 +1,30 @@
 <section>
-  <h3 class="text-blue-400 mb-8 font-bold text-shadow">Step 3: The Fallback</h3>
-  <div class="grid grid-cols-12 gap-8 text-left">
-    <div class="col-span-4 space-y-6">
-      <div class="p-6 bg-blue-900/20 border-l-4 border-blue-500 shadow-xl">
-        <h4 class="text-blue-400 font-bold mb-2 uppercase tracking-widest text-sm">Distribution</h4>
-        <p class="text-xl text-slate-300">Mathematically distribute labels across available buckets.</p>
+  <!-- 7.0: Step 3 Orchestration -->
+  <section>
+    <h3 class="text-blue-400 mb-8 font-bold">Step 3: The Fallback</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="p-6 bg-blue-900/20 border-l-4 border-blue-500 shadow-xl">
+          <h4
+            class="text-blue-400 font-bold mb-2 uppercase tracking-widest text-sm"
+          >
+            Distribution
+          </h4>
+          <p class="text-xl text-slate-300">
+            Mathematically distribute labels across available buckets.
+          </p>
+        </div>
+        <p class="text-lg text-slate-400 italic">
+          This ensures consistent UI coverage even with irregular datasets.
+        </p>
+        <div
+          class="bg-blue-600 text-white p-3 rounded font-bold animate-pulse text-center text-sm"
+        >
+          ↓ Press Down for Detail
+        </div>
       </div>
-      <p class="text-lg text-slate-400 italic">This ensures consistent UI coverage even with irregular datasets.</p>
-    </div>
-    <div class="col-span-8 overflow-x-auto">
-      <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="11">
+      <div class="col-span-8 overflow-x-auto">
+        <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="11">
 const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
   const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
   const monthBucketIndexes = getMonthBucketLastIndexes(data);
@@ -18,11 +33,67 @@ const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number):
   if (monthGapIndexes.length >= expectedCount) {
     return monthGapIndexes;
   }
-  
+
   // Fallback Logic: Even distribution
   return getEvenlySpacedIndexes(monthBucketIndexes);
 };
-      </code></pre>
+        </code></pre>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- 7.1: Even Spacing Detail -->
+  <section data-visibility="uncounted">
+    <h3 class="text-blue-300 mb-8 italic">Step 3.1: Even Distribution Logic</h3>
+    <div class="grid grid-cols-12 gap-8 text-left">
+      <div class="col-span-4 space-y-6">
+        <div class="fragment" data-fragment-index="0">
+          <span
+            class="text-blue-400 font-bold uppercase text-xs tracking-widest"
+            >Input</span
+          >
+          <p class="text-xl">
+            Accepts the array of all valid month-end indices found in Step 2.
+          </p>
+        </div>
+        <div class="fragment" data-fragment-index="1">
+          <span
+            class="text-indigo-400 font-bold uppercase text-xs tracking-widest"
+            >Interpolation</span
+          >
+          <p class="text-xl text-slate-300">
+            Calculate the exact position in the array for each of the 5 labels.
+          </p>
+        </div>
+        <div class="fragment" data-fragment-index="2">
+          <span
+            class="text-cyan-400 font-bold uppercase text-xs tracking-widest"
+            >Selection</span
+          >
+          <p class="text-xl text-slate-300">
+            Use <code>Math.floor</code> to pick the closest index and filter for
+            uniqueness.
+          </p>
+        </div>
+      </div>
+      <div class="col-span-8 overflow-x-auto">
+        <pre
+          class="fragment fade-out"
+          data-fragment-index="0"
+        ><code class="typescript"  data-trim data-noescape class="text-xs" data-line-numbers>
+const getEvenlySpacedIndexes = (indexes, labelCount = 5) => {
+  if (indexes.length <= labelCount) return indexes;
+
+  const lastIndex = indexes.length - 1;
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    // Formula: (Total Range * Current Step) / (Total Steps)
+    const i = Math.floor((lastIndex * pointIndex) / (labelCount - 1));
+    return indexes[i];
+  }).filter((v, i, self) => self.indexOf(v) === i);
+};
+        </code></pre>
+      </div>
+    </div>
+  </section>
 </section>

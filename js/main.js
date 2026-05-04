@@ -3,6 +3,7 @@ async function loadSlides() {
         'slide1_title.html',
         'slide2_challenge.html',
         'slide3_evolution.html',
+        'slide_transform.html',
         'slide8_group1_mid_term.html',     // Group 1 First
         'slide4_orchestration.html',      // Then the Orchestration logic it uses
         'slide5_step1_deepdive.html',     // Step 1 Details
@@ -12,13 +13,12 @@ async function loadSlides() {
         'slide10_group3_ytd.html',
         'slide11_group4_long_term.html',
         'slide12_group5_all_history.html',
-        'slide13_performance.html',
         'slide14_checklist.html',
         'slide15_qa.html'
     ];
 
     const container = document.querySelector('.slides');
-    
+
     for (const slide of slides) {
         try {
             const response = await fetch(`slides/${slide}`);
@@ -39,7 +39,7 @@ async function loadSlides() {
         minScale: 0.2,
         maxScale: 2.0,
         slideNumber: 'c/t',
-        navigationMode: 'grid',
+        navigationMode: 'default',
         plugins: [RevealHighlight]
     });
 }
