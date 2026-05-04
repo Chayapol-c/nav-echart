@@ -4,26 +4,23 @@
     <!-- Sidebar: Locked at 40% width -->
     <div class="w-[40%] flex-shrink-0 space-y-4">
       <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-pink-500">
-        <h4 class="font-bold text-pink-400 mb-2">Strategy: Smart Detection</h4>
+        <h4 class="font-bold text-pink-400 mb-2">กลยุทธ์: การตรวจจับอัจฉริยะ</h4>
         <p class="text-lg text-slate-300 italic">
-          "Dynamically adjust logic based on the fund's age."
+          "ปรับเปลี่ยนตรรกะแบบไดนามิกตามอายุของกองทุน"
         </p>
       </div>
       <p class="text-xl text-slate-400">
-        The system detects the history length and selects the best algorithm.
+        ระบบจะตรวจจับความยาวของประวัติและเลือกอัลกอริทึมที่ดีที่สุด
       </p>
       <ul class="text-lg space-y-2 text-slate-300 mt-4">
         <li>
-          🕰️ <span class="text-pink-400 font-bold">> 1 Year:</span> Use Year
-          Buckets.
+          🕰️ <span class="text-pink-400 font-bold">> 1 ปี:</span> ใช้กลุ่มปี (Year Buckets)
         </li>
         <li>
-          📅 <span class="text-pink-400 font-bold">> 1 Month:</span> Use Month
-          Gaps.
+          📅 <span class="text-pink-400 font-bold">> 1 เดือน:</span> ใช้ระยะห่างรายเดือน (Month Gaps)
         </li>
         <li>
-          ⚡ <span class="text-pink-400 font-bold">< 1 Month:</span> Use Math
-          Spacing.
+          ⚡ <span class="text-pink-400 font-bold">< 1 เดือน:</span> ใช้การเว้นระยะทางคณิตศาสตร์ (Math Spacing)
         </li>
       </ul>
     </div>
@@ -37,16 +34,16 @@ export const shouldShowXAxisLabelAll = (data, index) => {
   const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
 
   if (isMoreThanOneYear) {
-    // Legacy funds: Year intervals
+    // กองทุนที่มีประวัติยาวนาน: ระยะห่างรายปี
     return shouldShowXAxisLabel5Y(index, data);
   }
 
   if (isMoreThanMonth) {
-    // Established funds: Month gaps
+    // กองทุนที่เปิดมาสักพัก: ระยะห่างรายเดือน
     return shouldShowXAxisLabel1Y(index, data);
   }
 
-  // New funds: Even math spacing
+  // กองทุนใหม่: การเว้นระยะทางคณิตศาสตร์แบบเท่ากัน
   return shouldShowXAxisLabel1M(data, index);
 };
         </code></pre>
@@ -57,16 +54,16 @@ export const shouldShowXAxisLabelAll = (data, index) => {
   const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
 
   if (isMoreThanOneYear) {
-    // Legacy funds: Year intervals
+    // กองทุนที่มีประวัติยาวนาน: ระยะห่างรายปี
     return shouldShowXAxisLabel5Y(index, data);
   }
 
   if (isMoreThanMonth) {
-    // Established funds: Month gaps
+    // กองทุนที่เปิดมาสักพัก: ระยะห่างรายเดือน
     return shouldShowXAxisLabel1Y(index, data);
   }
 
-  // New funds: Even math spacing
+  // กองทุนใหม่: การเว้นระยะทางคณิตศาสตร์แบบเท่ากัน
   return shouldShowXAxisLabel1M(data, index);
 };
         </code></pre>
@@ -77,16 +74,16 @@ export const shouldShowXAxisLabelAll = (data, index) => {
   const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
 
   if (isMoreThanOneYear) {
-    // Legacy funds: Year intervals
+    // กองทุนที่มีประวัติยาวนาน: ระยะห่างรายปี
     return shouldShowXAxisLabel5Y(index, data);
   }
 
   if (isMoreThanMonth) {
-    // Established funds: Month gaps
+    // กองทุนที่เปิดมาสักพัก: ระยะห่างรายเดือน
     return shouldShowXAxisLabel1Y(index, data);
   }
 
-  // New funds: Even math spacing
+  // กองทุนใหม่: การเว้นระยะทางคณิตศาสตร์แบบเท่ากัน
   return shouldShowXAxisLabel1M(data, index);
 };
         </code></pre>
@@ -97,16 +94,16 @@ export const shouldShowXAxisLabelAll = (data, index) => {
   const { isMoreThanOneYear, isMoreThanMonth } = getHistoryDuration(data);
 
   if (isMoreThanOneYear) {
-    // Legacy funds: Year intervals
+    // กองทุนที่มีประวัติยาวนาน: ระยะห่างรายปี
     return shouldShowXAxisLabel5Y(index, data);
   }
 
   if (isMoreThanMonth) {
-    // Established funds: Month gaps
+    // กองทุนที่เปิดมาสักพัก: ระยะห่างรายเดือน
     return shouldShowXAxisLabel1Y(index, data);
   }
 
-  // New funds: Even math spacing
+  // กองทุนใหม่: การเว้นระยะทางคณิตศาสตร์แบบเท่ากัน
   return shouldShowXAxisLabel1M(data, index);
 };
         </code></pre>

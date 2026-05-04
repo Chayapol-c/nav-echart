@@ -1,15 +1,15 @@
 <section>
   <!-- 6.0: Step 2 Orchestration -->
   <section>
-    <h3 class="text-amber-400 mb-8">Step 2: The Guard</h3>
+    <h3 class="text-amber-400 mb-8">ขั้นตอนที่ 2: ตัวตรวจสอบความปลอดภัย (The Guard)</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="p-6 bg-amber-900/20 border-l-4 border-amber-500">
-          <h4 class="text-amber-400 font-bold mb-2 uppercase tracking-widest text-sm">Integrity Check</h4>
-          <p class="text-xl italic text-slate-300">"Do we have enough labels to satisfy the UI?"</p>
+          <h4 class="text-amber-400 font-bold mb-2 uppercase tracking-widest text-sm">การตรวจสอบความถูกต้อง (Integrity Check)</h4>
+          <p class="text-xl italic text-slate-300">"เรามีป้ายชื่อเพียงพอสำหรับ UI หรือไม่?"</p>
         </div>
         <div class="bg-amber-600 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
-          ↓ Press Down for Detail
+          ↓ กดลงเพื่อดูรายละเอียด
         </div>
       </div>
       <div class="col-span-8 overflow-x-auto">
@@ -17,7 +17,7 @@
 const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
   const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
 
-  // Guard Logic: Verify sufficiency via month buckets
+  // ตรรกะตัวตรวจสอบ: ตรวจสอบความเพียงพอผ่านกลุ่มเดือน (Month Buckets)
   const monthBucketIndexes = getMonthBucketLastIndexes(data);
   const expectedCount = Math.min(DEFAULT_COUNT, monthBucketIndexes.length);
 
@@ -32,20 +32,20 @@ const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number):
 
   <!-- 6.1: Bucket Logic Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-amber-300 mb-8 italic">Step 2.1: Date Bucketing Logic</h3>
+    <h3 class="text-amber-300 mb-8 italic">ขั้นตอนที่ 2.1: ตรรกะการจัดกลุ่มวันที่</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
-          <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Grouping</span>
-          <p class="text-xl text-slate-300">Map dates to YYYY-MM strings to create logical containers.</p>
+          <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">การจัดกลุ่ม (Grouping)</span>
+          <p class="text-xl text-slate-300">แมปวันที่เป็นสตริง YYYY-MM เพื่อสร้างกลุ่มที่สมเหตุสมผล</p>
         </div>
         <div class="fragment" data-fragment-index="2">
-          <span class="text-orange-400 font-bold uppercase text-xs tracking-widest">Uniqueness</span>
-          <p class="text-xl text-slate-300">Use a <code>Map</code> to ensure only the LAST index of each month is kept.</p>
+          <span class="text-orange-400 font-bold uppercase text-xs tracking-widest">ความไม่ซ้ำกัน (Uniqueness)</span>
+          <p class="text-xl text-slate-300">ใช้ <code>Map</code> เพื่อให้แน่ใจว่าเก็บเฉพาะดัชนีสุดท้าย (LAST index) ของแต่ละเดือนเท่านั้น</p>
         </div>
         <div class="fragment" data-fragment-index="3">
-          <span class="text-yellow-400 font-bold uppercase text-xs tracking-widest">Result</span>
-          <p class="text-xl text-slate-300">Convert the map back to an array of valid label indices.</p>
+          <span class="text-yellow-400 font-bold uppercase text-xs tracking-widest">ผลลัพธ์ (Result)</span>
+          <p class="text-xl text-slate-300">แปลง Map กลับเป็นอาร์เรย์ของดัชนีป้ายชื่อที่ใช้งานได้</p>
         </div>
       </div>
       <div class="col-span-8 r-stack overflow-x-auto">
@@ -62,7 +62,7 @@ const getDateBucketLastIndexes = (data, formatter) => {
 
   data.forEach((item, index) => {
     const key = formatter(dayjs(item.navDate));
-    // Overwrites previous index, leaving only the LAST one for the bucket
+    // เขียนทับดัชนีก่อนหน้า เหลือเพียงดัชนีสุดท้ายสำหรับกลุ่มนั้น
     buckets.set(key, index);
   });
 

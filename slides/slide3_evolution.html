@@ -2,7 +2,7 @@
   <!-- 3.0: Overview -->
   <section>
     <h3 class="mb-8 font-bold">
-      Evolution: The Road to <code>type: 'value'</code>
+      วิวัฒนาการ: เส้นทางสู่ <code>type: 'value'</code>
     </h3>
     <table class="text-lg w-full border-collapse table-auto">
       <thead>
@@ -10,7 +10,7 @@
           <th
             class="p-4 text-left text-slate-400 uppercase text-sm tracking-widest"
           >
-            Requirement
+            ข้อกำหนด
           </th>
           <th
             class="p-4 text-center text-red-400 uppercase text-sm tracking-widest"
@@ -25,7 +25,7 @@
           <th
             class="p-4 text-center text-teal-400 font-bold uppercase text-sm tracking-widest"
           >
-            Value (Manual)
+            Value (กำหนดเอง)
           </th>
         </tr>
       </thead>
@@ -33,39 +33,39 @@
         <tr
           class="border-2 border-solid border-slate-700/50 hover:bg-slate-800/30 transition-colors"
         >
-          <td class="p-4 font-bold text-slate-100">Equal Spacing</td>
-          <td class="p-4 text-center">Easy (Default)</td>
-          <td class="p-4 text-center text-red-300/80">Hard (Gaps Skew)</td>
+          <td class="p-4 font-bold text-slate-100">ระยะห่างที่เท่ากัน</td>
+          <td class="p-4 text-center">ง่าย (ค่าเริ่มต้น)</td>
+          <td class="p-4 text-center text-red-300/80">ยาก (ช่องว่างบิดเบี้ยว)</td>
           <td
             class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
           >
-            Perfect Precision
+            ความแม่นยำที่สมบูรณ์แบบ
           </td>
         </tr>
         <tr
           class="border-2 border-solid border-slate-700/50  hover:bg-slate-800/30 transition-colors"
         >
-          <td class="p-4 font-bold text-slate-100">Label Count (e.g. 1Y)</td>
-          <td class="p-4 text-center">Hard (Index math)</td>
+          <td class="p-4 font-bold text-slate-100">จำนวนป้ายชื่อ (เช่น 1Y)</td>
+          <td class="p-4 text-center">ยาก (คำนวณดัชนี)</td>
           <td class="p-4 text-center text-amber-300/80">
-            "Nice Ticks" Override
+            การเขียนทับแบบ "Nice Ticks"
           </td>
           <td
             class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
           >
-            100% Reliable
+            เชื่อถือได้ 100%
           </td>
         </tr>
         <tr
           class="border-2 border-solid border-slate-700/50 hover:bg-slate-800/30 transition-colors"
         >
-          <td class="p-4 font-bold text-slate-100">Holiday Handling</td>
-          <td class="p-4 text-center text-slate-500">No Gaps (Inaccurate)</td>
-          <td class="p-4 text-center">Visible Gaps</td>
+          <td class="p-4 font-bold text-slate-100">การจัดการวันหยุด</td>
+          <td class="p-4 text-center text-slate-500">ไม่มีช่องว่าง (ไม่แม่นยำ)</td>
+          <td class="p-4 text-center">เห็นช่องว่างชัดเจน</td>
           <td
             class="p-4 text-center text-teal-300 font-bold underline decoration-teal-500/50"
           >
-            Dynamic / Optional
+            Dynamic / เลือกได้
           </td>
         </tr>
       </tbody>
@@ -78,27 +78,24 @@
 
   <!-- 3.2: Technical "Why" -->
   <section data-visibility="uncounted">
-    <h3 class="text-blue-400 mb-8 font-bold">Why Value + Manual?</h3>
+    <h3 class="text-blue-400 mb-8 font-bold">ทำไมต้อง type Value + กำหนดเอง?</h3>
     <div class="grid grid-cols-2 gap-12 text-left">
       <div class="space-y-6">
         <div>
           <h4
             class="text-amber-400 font-bold uppercase text-xs tracking-widest mb-2"
           >
-            The "Nice Ticks" Problem
+            ปัญหาของ "Nice Ticks"
           </h4>
           <p class="text-xl text-slate-300 leading-relaxed">
-            ECharts' <code>type: 'time'</code> algorithm favors human-readable
-            intervals over developer intent. If it decides 4 ticks look "nicer"
-            than 3, it will
-            <span class="text-amber-400 italic">silently override</span> your
-            configuration.
+            Algorithm <code>type: 'time'</code> ของ ECharts ให้ความสำคัญกับช่วงเวลาที่มนุษย์อ่านง่ายมากกว่าความตั้งใจของนักพัฒนา หากมันตัดสินใจว่า 4 ขีด ดู "สวยกว่า" 3 ขีด มันจะ
+            <span class="text-amber-400 italic">เขียนทับการตั้งค่าของคุณโดยไม่แจ้งให้ทราบ</span>
           </p>
         </div>
         <div
           class="p-4 bg-slate-900/50 border-l-4 border-amber-500 italic text-slate-400 text-lg"
         >
-          "Result: Non-deterministic UI layouts."
+          "ผลลัพธ์: เลย์เอาต์ UI ที่คาดเดาไม่ได้"
         </div>
       </div>
       <div class="space-y-6">
@@ -106,19 +103,17 @@
           <h4
             class="text-teal-400 font-bold uppercase text-xs tracking-widest mb-2"
           >
-            The Manual Advantage
+            ข้อดีของการกำหนดเอง
           </h4>
           <p class="text-xl text-slate-300 leading-relaxed">
-            By treating the axis as a mathematical range (0-100 or Timestamp),
-            we "anchor" labels to specific points:
-            <code class="text-teal-300">[min, mid, max]</code>.
+            ด้วยการจัดการแกนเป็นช่วงทางคณิตศาสตร์ (0-100 หรือ Timestamp) เราจะ "ยึด" ป้ายชื่อไว้ที่จุดเฉพาะ:
+            <code class="text-teal-300">[min, mid, max]</code>
           </p>
         </div>
         <div
           class="p-4 bg-slate-900/50 border-l-4 border-teal-500 text-slate-300 text-lg"
         >
-          We use a <strong>Custom Formatter</strong> to map numeric positions
-          back to calendar months with 100% certainty.
+          เราใช้ <strong>Custom Formatter</strong> เพื่อจับคู่ตำแหน่งตัวเลขกลับไปยังเดือนตามปฏิทินด้วยความมั่นใจ 100%
         </div>
       </div>
     </div>

@@ -5,23 +5,23 @@
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-5 space-y-4">
         <div class="p-6 bg-slate-800 rounded-lg border-l-4 border-purple-500">
-          <h4 class="font-bold text-purple-400 mb-2 uppercase tracking-widest text-sm">Strategy: Year Buckets</h4>
-          <p class="text-lg text-slate-300 italic">"At this scale, month-level noise is removed."</p>
+          <h4 class="font-bold text-purple-400 mb-2 uppercase tracking-widest text-sm">กลยุทธ์: กลุ่มปี (Year Buckets)</h4>
+          <p class="text-lg text-slate-300 italic">"ในสเกลนี้ สัญญาณรบกวนในระดับเดือนจะถูกกำจัดออกไป"</p>
         </div>
         <p class="text-xl text-slate-400">
-          We look for the <strong>End of each Year</strong> going backward from the current date.
+          เรามองหา <strong>จุดสิ้นสุดของแต่ละปี</strong> โดยไล่ย้อนกลับจากวันที่ปัจจุบัน
         </p>
         <div class="bg-purple-600 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
-          ↓ Press Down for Detail
+          ↓ กดลงเพื่อดูรายละเอียด
         </div>
       </div>
       <div class="col-span-7">
         <pre><code class="typescript text-sm" data-trim data-noescape>
 export const shouldShowXAxisLabel5Y = (index, data) => {
-  // Logic: Get labels for exactly the last 5 years
+  // ตรรกะ: รับป้ายชื่อสำหรับช่วง 5 ปีล่าสุดพอดี
   const indexes = getLatestYearLabelIndexes(
     data,
-    5 // Year Count
+    5 // จำนวนปี
   );
 
   return isTargetIndex(indexes, index);
@@ -33,19 +33,19 @@ export const shouldShowXAxisLabel5Y = (index, data) => {
 
   <!-- 11.1: Year Logic Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-purple-300 mb-8 italic">Step 4.1: Year Anchor Logic</h3>
+    <h3 class="text-purple-300 mb-8 italic">ขั้นตอนที่ 4.1: ตรรกะจุดยึดรายปี</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
-          <span class="text-purple-400 font-bold uppercase text-xs tracking-widest text-shadow-sm">Alignment</span>
-          <p class="text-xl">Identify the current month to use as a consistent year-over-year anchor.</p>
+          <span class="text-purple-400 font-bold uppercase text-xs tracking-widest text-shadow-sm">การจัดแนว</span>
+          <p class="text-xl">ระบุเดือนปัจจุบันเพื่อใช้เป็นจุดยึดที่สอดคล้องกันแบบปีต่อปี</p>
         </div>
         <div class="fragment" data-fragment-index="2">
-          <span class="text-fuchsia-400 font-bold uppercase text-xs tracking-widest">Year Projection</span>
-          <p class="text-xl text-slate-300">Mathematically subtract years (T, T-1, T-2) to target the same month.</p>
+          <span class="text-fuchsia-400 font-bold uppercase text-xs tracking-widest">การฉายภาพปี</span>
+          <p class="text-xl text-slate-300">ลบปีทางคณิตศาสตร์ (T, T-1, T-2) เพื่อระบุเดือนเดียวกัน</p>
         </div>
         <div class="bg-indigo-600 text-white p-2 rounded font-bold animate-pulse text-center text-xs mt-4">
-          ↓ Keep going Down for implementation
+          ↓ กดลงต่อเพื่อดูการนำไปใช้งาน
         </div>
       </div>
       <div class="col-span-8 overflow-x-auto">
@@ -57,7 +57,7 @@ const getLatestYearLabelIndexes = (data, labelCount) => {
   return Array.from({ length: labelCount }, (_, pointIndex) => {
     const revIndex = labelCount - pointIndex - 1;
     const year = lastDate.year() - revIndex;
-    // Drill Down: How do we find the index for this year?
+    // เจาะลึก: เราจะหาดัชนีสำหรับปีนี้ได้อย่างไร?
     return findLastIndexByYear(data, year, targetMonth);
   }).filter(v => v !== undefined);
 };
@@ -68,20 +68,20 @@ const getLatestYearLabelIndexes = (data, labelCount) => {
 
   <!-- 11.2: Year Finder Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-indigo-300 mb-8 italic">Step 4.2: findLastIndexByYear Implementation</h3>
+    <h3 class="text-indigo-300 mb-8 italic">ขั้นตอนที่ 4.2: การนำ findLastIndexByYear มาใช้</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
-          <span class="text-indigo-400 font-bold uppercase text-xs tracking-widest">Reverse Search</span>
-          <p class="text-xl">Scan data backward to find the latest point in the target year.</p>
+          <span class="text-indigo-400 font-bold uppercase text-xs tracking-widest">การค้นหาย้อนกลับ</span>
+          <p class="text-xl">สแกนข้อมูลย้อนกลับเพื่อหาจุดข้อมูลล่าสุดในปีเป้าหมาย</p>
         </div>
         <div class="fragment" data-fragment-index="2">
-          <span class="text-blue-400 font-bold uppercase text-xs tracking-widest">Month Match</span>
-          <p class="text-xl text-slate-300">If we find the <code>targetMonth</code>, return it immediately for perfect alignment.</p>
+          <span class="text-blue-400 font-bold uppercase text-xs tracking-widest">เดือนที่ตรงกัน</span>
+          <p class="text-xl text-slate-300">หากพบ <code>targetMonth</code> ให้ส่งคืนทันทีเพื่อการจัดแนวที่สมบูรณ์แบบ</p>
         </div>
         <div class="fragment" data-fragment-index="3">
-          <span class="text-teal-400 font-bold uppercase text-xs tracking-widest">Smart Fallback</span>
-          <p class="text-xl text-slate-300">If the month is missing (holiday), return the last available date in that year.</p>
+          <span class="text-teal-400 font-bold uppercase text-xs tracking-widest">แผนสำรองที่ชาญฉลาด</span>
+          <p class="text-xl text-slate-300">หากไม่พบเดือนนั้น (วันหยุด) ให้ส่งคืนวันที่ล่าสุดที่มีอยู่ในปีนั้น</p>
         </div>
       </div>
       <div class="col-span-8 overflow-x-auto">
@@ -93,14 +93,14 @@ const findLastIndexByYear = (data, year, targetMonth) => {
     const date = dayjs(data[index].navDate);
 
     if (date.year() !== year) continue;
-    fallbackIndex = fallbackIndex ?? index; // Track last seen in year
+    fallbackIndex = fallbackIndex ?? index; // ติดตามรายการล่าสุดที่พบในปีนั้น
 
     if (date.month() === targetMonth) {
-      return index; // Found perfect match!
+      return index; // พบเดือนที่ตรงกันพอดี!
     }
   }
 
-  return fallbackIndex; // Use latest available in that year
+  return fallbackIndex; // ใช้ข้อมูลล่าสุดที่มีอยู่ในปีนั้น
 };
         </code></pre>
       </div>

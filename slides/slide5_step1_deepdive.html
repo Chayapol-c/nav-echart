@@ -1,24 +1,24 @@
 <section>
   <!-- 5.0: Step 1 Orchestration -->
   <section>
-    <h3 class="text-teal-300 mb-8">Step 1: The Ideal Path</h3>
+    <h3 class="text-teal-300 mb-8">ขั้นตอนที่ 1: เส้นทางที่เหมาะสมที่สุด (The Ideal Path)</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="p-6 bg-teal-900/20 border-l-4 border-teal-500">
-          <h4 class="text-teal-400 font-bold mb-2 uppercase tracking-widest text-sm">Logic</h4>
-          <p class="text-xl">Project month gaps backward to keep labels calendar-aligned.</p>
+          <h4 class="text-teal-400 font-bold mb-2 uppercase tracking-widest text-sm">ตรรกะ (Logic)</h4>
+          <p class="text-xl">คำนวณระยะห่างรายเดือนย้อนกลับเพื่อให้ป้ายชื่อสอดคล้องกับปฏิทิน</p>
         </div>
         <div class="bg-blue-500 text-white p-3 rounded font-bold animate-pulse text-center text-sm">
-          ↓ Press Down for Detail
+          ↓ กดลงเพื่อดูรายละเอียด
         </div>
       </div>
       <div class="col-span-8 overflow-x-auto">
         <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
 const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number): number[] => {
-  // Step 1: Attempt to get natural gaps
+  // ขั้นตอนที่ 1: พยายามดึงระยะห่างตามธรรมชาติ
   const monthGapIndexes = getMonthGapLabelIndexesFromLatest(data, monthGap);
 
-  // ... rest of the code on next slides
+  // ... codeส่วนที่เหลือในสไลด์ถัดไป
 };
         </code></pre>
       </div>
@@ -27,27 +27,27 @@ const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number):
 
   <!-- 5.1: Deep Dive Detail -->
   <section data-visibility="uncounted">
-    <h3 class="text-blue-400 mb-8 italic">Step 1.1: Reverse Lookup Logic</h3>
+    <h3 class="text-blue-400 mb-8 italic">ขั้นตอนที่ 1.1: ตรรกะการค้นหาย้อนกลับ</h3>
     <div class="grid grid-cols-12 gap-8 text-left">
       <div class="col-span-4 space-y-6">
         <div class="fragment" data-fragment-index="1">
-          <span class="text-blue-400 font-bold uppercase text-xs tracking-widest">Anchor</span>
-          <p class="text-xl">Start from the latest NAV date point.</p>
+          <span class="text-blue-400 font-bold uppercase text-xs tracking-widest">จุดยึด (Anchor)</span>
+          <p class="text-xl">เริ่มต้นจากจุดข้อมูล NAV ล่าสุด</p>
         </div>
         <div class="fragment" data-fragment-index="2">
-          <span class="text-indigo-400 font-bold uppercase text-xs tracking-widest">Project</span>
-          <p class="text-xl text-slate-300">Subtract intervals (T-4, T-8) to find keys.</p>
+          <span class="text-indigo-400 font-bold uppercase text-xs tracking-widest">การฉายภาพ (Project)</span>
+          <p class="text-xl text-slate-300">ลบช่วงเวลา (เช่น T-4, T-8) เพื่อค้นหาคีย์เดือน</p>
         </div>
         <div class="fragment" data-fragment-index="3">
-          <span class="text-purple-400 font-bold uppercase text-xs tracking-widest">Verify</span>
-          <p class="text-xl text-slate-300">Filter unique indices & valid months.</p>
+          <span class="text-purple-400 font-bold uppercase text-xs tracking-widest">การตรวจสอบ (Verify)</span>
+          <p class="text-xl text-slate-300">กรองดัชนีที่ไม่ซ้ำและเดือนที่ใช้งานได้</p>
         </div>
       </div>
       <div class="col-span-8 r-stack overflow-x-auto">
         <div class="fragment fade-in-then-out w-full" data-fragment-index="1">
           <pre><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="3">
 const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
-  // Always anchor to the most recent data point
+  // ยึดกับจุดข้อมูลล่าสุดเสมอ
   const lastDate = dayjs(data[data.length - 1].navDate);
 
   const indexes = Array.from({ length: count }, (_, pointIndex) => {
@@ -64,7 +64,7 @@ const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
   const lastDate = dayjs(data[data.length - 1].navDate);
   const indexes = Array.from({ length: count }, (_, pointIndex) => {
     const revIndex = count - pointIndex - 1;
-    // Calculate historical month keys
+    // คำนวณคีย์เดือนในอดีต
     const monthKey = lastDate.subtract(revIndex * monthGap, 'month').format('YYYY-MM');
     return findLastIndexByMonthKey(data, monthKey);
   });
@@ -82,7 +82,7 @@ const getMonthGapLabelIndexesFromLatest = (data, monthGap, count = 3) => {
   })
   .filter(v => v !== undefined);
 
-  return [...new Set(indexes)]; // Ensure unique indices
+  return [...new Set(indexes)]; // ตรวจสอบให้แน่ใจว่าดัชนีไม่ซ้ำกัน
 };
           </code></pre>
         </div>
