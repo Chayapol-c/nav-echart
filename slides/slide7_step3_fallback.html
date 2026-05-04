@@ -75,11 +75,48 @@ const getMonthGapIndexesWithFallback = (data: IFundHistory[], monthGap: number):
           </p>
         </div>
       </div>
-      <div class="col-span-8 overflow-x-auto">
+      <div class="col-span-8 r-stack overflow-x-auto">
+        <!-- Step 1: Input -->
         <pre
-          class="fragment fade-out"
+          class="m-0 fragment fade-in-then-out w-full"
           data-fragment-index="0"
-        ><code class="typescript"  data-trim data-noescape class="text-xs" data-line-numbers>
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="1-2">
+const getEvenlySpacedIndexes = (indexes, labelCount = 5) => {
+  if (indexes.length <= labelCount) return indexes;
+
+  const lastIndex = indexes.length - 1;
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    // สูตร: (ช่วงทั้งหมด * ขั้นตอนปัจจุบัน) / (ขั้นตอนทั้งหมด)
+    const i = Math.floor((lastIndex * pointIndex) / (labelCount - 1));
+    return indexes[i];
+  }).filter((v, i, self) => self.indexOf(v) === i);
+};
+        </code></pre>
+
+        <!-- Step 2: Interpolation -->
+        <pre
+          class="m-0 fragment fade-in-then-out w-full"
+          data-fragment-index="1"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="7-8">
+const getEvenlySpacedIndexes = (indexes, labelCount = 5) => {
+  if (indexes.length <= labelCount) return indexes;
+
+  const lastIndex = indexes.length - 1;
+
+  return Array.from({ length: labelCount }, (_, pointIndex) => {
+    // สูตร: (ช่วงทั้งหมด * ขั้นตอนปัจจุบัน) / (ขั้นตอนทั้งหมด)
+    const i = Math.floor((lastIndex * pointIndex) / (labelCount - 1));
+    return indexes[i];
+  }).filter((v, i, self) => self.indexOf(v) === i);
+};
+        </code></pre>
+
+        <!-- Step 3: Selection -->
+        <pre
+          class="m-0 fragment fade-in w-full"
+          data-fragment-index="2"
+        ><code class="typescript" data-trim data-noescape class="text-xs" data-line-numbers="8,10">
 const getEvenlySpacedIndexes = (indexes, labelCount = 5) => {
   if (indexes.length <= labelCount) return indexes;
 
